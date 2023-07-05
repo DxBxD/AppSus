@@ -3,23 +3,18 @@ const { createApp } = Vue
 import { router } from './routes.js'
 
 import AppHeader from './cmps/AppHeader.js'
-import AppFooter from './cmps/AppFooter.js'
 import UserMsg from './cmps/UserMsg.js'
 
 const options = {
 	template: `
-        <section>
+        <section class="main-layout">
             <AppHeader />
-            <div class="main-route">
-                <RouterView />
-            </div>
-            <AppFooter />
+            <RouterView />
             <UserMsg />
         </section>
     `,
 	components: {
 		AppHeader,
-		AppFooter,
 		UserMsg,
 	},
 }
