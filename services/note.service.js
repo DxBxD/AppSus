@@ -55,7 +55,6 @@ export const noteService = {
     get,
     remove,
     save,
-    getEmptyNote,
     getNextNoteId,
     getFilterBy,
     setFilterBy,
@@ -112,7 +111,7 @@ function save(note) {
     }
 }
 
-function getEmptyCar() {
+function getEmptyNote() {
     return { id: '' }
 }
 
