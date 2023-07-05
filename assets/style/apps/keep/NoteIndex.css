@@ -2,8 +2,8 @@
     background-color: #202124;
     column-count: 3;
     column-gap: 1rem;
+    overflow: hidden;
     height: 100vh;
-    width: 100vh;
 }
 
 ul {
@@ -30,4 +30,19 @@ ul {
     color: #000000;
     font-family: "Google Sans", Roboto, Arial, sans-serif;
     font-weight: 400;
+}
+
+.keep-nav-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+}
+
+.keep-menu{
+    padding-left: 1em;
+}
+
+.create-note-input{
+    
 }
