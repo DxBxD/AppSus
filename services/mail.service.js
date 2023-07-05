@@ -28,20 +28,20 @@ function query() {
         if (gFilterBy.status) {
           switch(gFilterBy.status) {
             case 'inbox':
-              mails = mails.filter(mail => mail.to === loggedinUser.email && mail.removedAt === null)
-              break
+                mails = mails.filter(mail => mail.to === loggedinUser.email && mail.removedAt === null)
+                break
             case 'starred':
                 mails = mails.filter(mail => mail.isStarred === true)
                 break
             case 'sent':
-              mails = mails.filter(mail => mail.from === loggedinUser.email && mail.sentAt)
-              break
+                mails = mails.filter(mail => mail.from === loggedinUser.email && mail.sentAt)
+                break
             case 'trash':
-              mails = mails.filter(mail => mail.removedAt !== null)
-              break
+                mails = mails.filter(mail => mail.removedAt !== null)
+                break
             case 'draft':
-              mails = mails.filter(mail => mail.from === loggedinUser.email && mail.sentAt === null)
-              break
+                mails = mails.filter(mail => mail.from === loggedinUser.email && mail.sentAt === null)
+                break
           }
         }
         return mails
@@ -104,7 +104,7 @@ function setFilterBy(filterBy = {}) {
                 body: 'Hello world!', 
                 isRead: false,
                 isStarred: false,
-                sentAt: Date.now(), 
+                sentAt: 1688475453161, 
                 removedAt: null,
                 from: 'test@test.com',
                 to: 'user@appsus.com'
@@ -126,8 +126,8 @@ function setFilterBy(filterBy = {}) {
                 body: 'This is a trashed email.', 
                 isRead: false,
                 isStarred: false,
-                sentAt: Date.now(), 
-                removedAt: Date.now(),
+                sentAt: 1628575453161, 
+                removedAt: 1628575453161,
                 from: 'test@test.com',
                 to: 'user@appsus.com'
             },
