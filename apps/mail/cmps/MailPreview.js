@@ -2,7 +2,9 @@ export default {
     props: ['mail'],
     template: `
         <div class="mail-preview" @click.stop="onOpenMail">
-            <span class="icons" @click.stop="onToggleStar">{{ mail.isStarred ? '★' : '☆' }}</span>
+            <span class="icons" @click.stop="onToggleStar">
+                <span class="material-icons">{{ mail.isStarred ? 'star' : 'star_border' }}</span>
+            </span>
             <span class="title">{{ mail.subject }}</span>
             <span class="snippet">{{ mail.body }}</span>
             <span class="date">{{ formattedDate }}</span>
@@ -27,7 +29,7 @@ export default {
     },
     methods: {
         onOpenMail() {
-            this.$emit('clicked', this.mail)
+            this.$router.push(`/mail/${this.mail.id}`)
         },
         onToggleStar() {
             this.mail.isStarred = !this.mail.isStarred

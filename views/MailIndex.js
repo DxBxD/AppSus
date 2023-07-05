@@ -3,21 +3,25 @@ import NavBar from '../apps/mail/cmps/NavBar.js'
 import MailMenu from '../apps/mail/cmps/MailMenu.js'
 import MailSort from '../apps/mail/cmps/MailSort.js'
 import MailList from '../apps/mail/cmps/MailList.js'
+import MailCompose from '../apps/mail/cmps/MailCompose.js'
 
 export default {
     template: `
         <section class="mail-page">
+            <div class="mail-logo" @click="onFilter('inbox')"><RouterLink to="/mail">MisterEmail</RouterLink></div>
+            <div class="mail-compose"><MailCompose/></div>
             <NavBar @search="onSearch"/>
             <MailMenu @filter="onFilter"/>
             <MailSort @sort="onSort"/>
-            <MailList :mails="mails" @starred="onMailStarred"/>
+            <RouterView :mails="mails" @starred="onMailStarred"/>
         </section>
     `,
     components: {
         NavBar,
+        MailCompose,
         MailMenu,
         MailSort,
-        MailList
+        MailList,
     },
     data() {
         return {

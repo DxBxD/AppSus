@@ -17,5 +17,11 @@ export default {
         onMailStarred(starredMail) {
             this.$emit('starred', starredMail)
         }
+    },
+    watch: {
+        '$route': {
+            handler: 'fetchMails',
+            immediate: true
+        }
     }
 }

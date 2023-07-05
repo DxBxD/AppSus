@@ -20,7 +20,6 @@
 
     /* Mail */
     @import 'apps/mail/MailIndex.css';
-    @import 'apps/mail/Mail.css';
 
     /* Keep */
     @import 'apps/keep/NoteIndex.css';

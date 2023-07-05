@@ -6,7 +6,8 @@ export const utilService = {
     saveToStorage,
     padNum,
     getDayName,
-    getMonthName
+    getMonthName,
+    generateRandomTimestamp
 }
 
 function makeId(length = 6) {
@@ -59,4 +60,10 @@ function getMonthName(date) {
         'July', 'August', 'September', 'October', 'November', 'December'
     ]
     return monthNames[date.getMonth()]
+}
+
+function generateRandomTimestamp() {
+    const currentTimestamp = Date.now()
+    const fiveYearsAgo = currentTimestamp - 5 * 365 * 24 * 60 * 60 * 1000
+    return getRandomIntInclusive(fiveYearsAgo, currentTimestamp)
 }

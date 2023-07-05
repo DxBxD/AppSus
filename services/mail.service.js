@@ -1,7 +1,7 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
-const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
+const loggedinUser = { email: 'mahatma@appsus.com', fullname: 'Mahatma Appsus' }
 const MAIL_KEY = 'mailDB'
 var gFilterBy = { txt: '', status: 'inbox' }
 
@@ -95,7 +95,7 @@ function setFilterBy(filterBy = {}) {
                 isStarred: true,
                 sentAt: Date.now(), 
                 removedAt: null,
-                from: 'user@appsus.com',
+                from: 'mahatma@appsus.com',
                 to: 'test@test.com'
             },
             { 
@@ -107,7 +107,7 @@ function setFilterBy(filterBy = {}) {
                 sentAt: 1688475453161, 
                 removedAt: null,
                 from: 'test@test.com',
-                to: 'user@appsus.com'
+                to: 'mahatma@appsus.com'
             },
             {
                 id: utilService.makeId(), 
@@ -117,7 +117,7 @@ function setFilterBy(filterBy = {}) {
                 isStarred: false,
                 sentAt: null, 
                 removedAt: null,
-                from: 'user@appsus.com',
+                from: 'mahatma@appsus.com',
                 to: 'test@test.com'
             },
             {
@@ -129,8 +129,85 @@ function setFilterBy(filterBy = {}) {
                 sentAt: 1628575453161, 
                 removedAt: 1628575453161,
                 from: 'test@test.com',
-                to: 'user@appsus.com'
+                to: 'mahatma@appsus.com'
             },
+            {
+                id: utilService.makeId(),
+                subject: 'Lunch Invitation',
+                body: 'Dear Mahatma, I would like to invite you to a lunch meeting tomorrow. Please let me know if you are available. Best regards, John',
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                removedAt: null,
+                from: 'john@example.com',
+                to: 'mahatma@appsus.com',
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Important Announcement',
+                body: 'Hi there, We have an important announcement to make regarding upcoming changes in our company. Please check your email for further details. Regards, Marketing Team',
+                isRead: false,
+                isStarred: true,
+                sentAt: utilService.generateRandomTimestamp(),
+                removedAt: null,
+                from: 'marketing@example.com',
+                to: 'mahatma@appsus.com',
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Meeting Reminder',
+                body: 'Dear Mahatma, This is a reminder for our meeting scheduled for next week. Please make sure to be prepared. Regards, Sarah',
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                removedAt: null,
+                from: 'sarah@example.com',
+                to: 'mahatma@appsus.com',
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Job Opportunity',
+                body: 'Hi Mahatma, We have a job opening that might interest you. Please check the attached job description and let us know if you are interested. Best regards, HR Department',
+                isRead: false,
+                isStarred: true,
+                sentAt: utilService.generateRandomTimestamp(),
+                removedAt: null,
+                from: 'hr@example.com',
+                to: 'mahatma@appsus.com',
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Vacation Package Offers',
+                body: 'Dear Mahatma, Plan your dream vacation with our exclusive offers. Check out the attached brochure for more details. Happy travels! Regards, Travel Agency',
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                removedAt: null,
+                from: 'travel@example.com',
+                to: 'mahatma@appsus.com',
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Product Update',
+                body: 'Hi there, We have released a new version of our product with exciting features and improvements. Please update your application to enjoy the latest enhancements. Regards, Product Team',
+                isRead: false,
+                isStarred: true,
+                sentAt: utilService.generateRandomTimestamp(),
+                removedAt: null,
+                from: 'product@example.com',
+                to: 'mahatma@appsus.com',
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Payment Confirmation',
+                body: 'Dear Mahatma, Your payment has been successfully processed. Thank you for your purchase. For any inquiries, please contact our support team. Best regards, Finance Department',
+                isRead: false,
+                isStarred: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                removedAt: null,
+                from: 'finance@example.com',
+                to: 'mahatma@appsus.com',
+              },
         ]
         utilService.saveToStorage(MAIL_KEY, mails)
     }

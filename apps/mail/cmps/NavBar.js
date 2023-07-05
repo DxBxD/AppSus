@@ -12,6 +12,7 @@ export default {
     methods: {
         onSearch() {
             this.$emit('search', this.searchText)
+            this.$router.push('/mail')
         }
     }
 }
