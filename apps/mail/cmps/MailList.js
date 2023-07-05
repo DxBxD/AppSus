@@ -1,21 +1,29 @@
-// import { mailService } from '../../../services/mail.service.js'
+import { mailService } from '../../../services/mail.service.js'
+import MailPreview from './MailPreview.js'
 
 export default {
     template: `
-    <div class="mail-list">
-        <div v-for="mail in mails" :key="mail.id">
-            <h3>mail.subject</h3>
-            <p>mail.body</p>
-            <p> sent at </p>
-        </div>
-    </div>
+    <section class="mail-list">
+        <MailPreview v-for="mail in mails" :key="mail.id" :mail="mail" @clicked="onMailClick" />
+    </section>
     `,
+    components: {
+        MailPreview
+    },
     data() {
         return {
             mails: []
         }
     },
     created() {
-        
+        mailService.query()
+            .then(mails => {
+                this.mails = mails
+            })
+    },
+    methods: {
+        onMailClick(selectedMail) {
+            ///////////////////////
+        }
     }
 }

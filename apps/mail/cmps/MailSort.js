@@ -1,9 +1,11 @@
 export default {
     template: `
-        <div class="mail-sort">
-            <button @click="onSort('date')"><i class="fa fa-calendar"></i> Date</button>
-            <button @click="onSort('subject')"><i class="fa fa-book"></i> Subject</button>
+        <section class="mail-sort">
+            <div>
+                <button @click="onSort('date')"><span class="material-icons">event</span> Date <span class="material-icons">arrow_drop_down</span></button>
+                <button @click="onSort('subject')"><span class="material-icons">subject</span> Subject <span class="material-icons">arrow_drop_down</span></button>
         </div>
+        </section>
     `,
     methods: {
         onSort(type) {

@@ -1,12 +1,13 @@
 export default {
     template: `
         <aside class="mail-menu">
+            <button class="compose-button"><span class="material-icons">edit</span>Compose</button>
             <ul>
-                <li><i class="fa fa-inbox"></i> Inbox</li>
-                <li><i class="fa fa-star"></i> Starred</li>
-                <li><i class="fa fa-send"></i> Sent</li>
-                <li><i class="fa fa-file"></i> Draft</li>
-                <li><i class="fa fa-trash"></i> Trash</li>
+                <li><span class="material-icons">inbox</span> Inbox</li>
+                <li><span class="material-icons">star_border</span> Starred</li>
+                <li><span class="material-icons">send</span> Sent</li>
+                <li><span class="material-icons">insert_drive_file</span> Draft</li>
+                <li><span class="material-icons">delete</span> Trash</li>
             </ul>
         </aside>
     `

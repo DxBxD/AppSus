@@ -1,4 +1,4 @@
-import notes from '../apps/keep/services/note.service.js'
+// import notes from '../apps/keep/services/note.service.js'
 export default {
     template: `
         <section class="keep-index">
@@ -8,6 +8,6 @@ export default {
     `
     , 
     components: {
-        notes,
+        // notes,
     }
 }

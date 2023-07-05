@@ -7,9 +7,13 @@ export default {
 	template: `
         <section class="mail-page">
             <NavBar />
-            <MailMenu />
-            <MailSort />
-            <MailList />
+            <div class="mail-main">
+                <MailMenu />
+                <div class="mail-content">
+                    <MailSort />
+                    <MailList @click.native="openMail" />
+                </div>
+            </div>
         </section>
     `,
     components: {
@@ -17,5 +21,9 @@ export default {
         MailMenu,
         MailList,
         MailSort,
+    },
+    methods: {
+        openMail() {
+        }
     }
 }
