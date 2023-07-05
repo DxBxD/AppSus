@@ -3,9 +3,9 @@ export default {
     template: `
         <div class="mail-preview" @click.stop="onOpenMail">
             <span class="icons" @click.stop="onToggleStar">{{ mail.isStarred ? '★' : '☆' }}</span>
-            <p class="title">{{ mail.subject }}</p>
-            <p class="snippet">{{ mail.body }}</p>
-            <p class="date">{{ formattedDate }}</p>
+            <span class="title">{{ mail.subject }}</span>
+            <span class="snippet">{{ mail.body }}</span>
+            <span class="date">{{ formattedDate }}</span>
         </div>
     `,
     computed: {
