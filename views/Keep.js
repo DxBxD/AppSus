@@ -1,6 +1,6 @@
 export default {
 	template: `
-        <section class="home-page">
+        <section class="keep-page">
             <h1>Keep</h1>
         </section>
     `,
