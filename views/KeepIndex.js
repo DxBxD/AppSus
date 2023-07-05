@@ -4,10 +4,9 @@ import { noteService } from "../services/note.service.js"
 export default {
     template: `
         <section class="keep-index">
-            <h1>Keep Index</h1>
             <NoteList 
                 v-if="notes"
-                :notes="notes">
+                :notes="notes"/>
         </section>
     `,
     data() {
@@ -15,7 +14,11 @@ export default {
             notes: [],
         }
     },
-    components: {
-        // notes,
+    created() {
+        noteService.query()
+            .then(notes => this.notes = notes)
+    },
+        components: {
+        NoteList,
     }
 }

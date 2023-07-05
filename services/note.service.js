@@ -1,46 +1,6 @@
-// const notes = [
-//     {
-//         id: 'n101',
-//         createdAt: 1112222,
-//         type: 'NoteTxt',
-//         isPinned: true,
-//         style: {
-//             backgroundColor: '#00d',
-//         },
-//         info: {
-//             txt: 'Fullstack Me Baby!'
-//         }
-//     },
-//     {
-//         id: 'n102',
-//         type: 'NoteImg',
-//         isPinned: false,
-//         info: {
-//             url: 'http://some-img/me',
-//             title: 'Bobi and Me'
-//         },
-//         style: {
-//             backgroundColor: '#00d',
-//         },
-//     },
-//     {
-//         id: 'n103',
-//         type: 'NoteTodos',
-//         isPinned: false,
-//         info: {
-//             title: 'Get my stuff together',
-//             todos: [
-//                 { txt: 'Driving liscence', doneAt: null },
-//                 { txt: 'Coding power', doneAt: 187111111 }
-//             ]
-//         },
-//     },
-// ]
-
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
-const PAGE_SIZE = 5
 const NOTES_KEY = 'notesDB'
 
 // TODO - update gFilterBy & gSortBy
@@ -63,21 +23,21 @@ window.noteService = noteService
 
 function query() {
     return storageService.query(NOTES_KEY).then(notes => {
-        if (gFilterBy.txt) {
-            const regex = new RegExp(gFilterBy.txt, 'i')
-            notes = notes.filter(notes => regex.test(notes.date))
-        }
+        // if (gFilterBy.txt) {
+        //     const regex = new RegExp(gFilterBy.txt, 'i')
+        //     notes = notes.filter(notes => regex.test(notes.date))
+        // }
 
-        if (gPageIdx !== undefined) {
-            const startIdx = gPageIdx * PAGE_SIZE
-            cars = cars.slice(startIdx, startIdx + PAGE_SIZE)
-        }
-        else if (gSortBy.txt !== undefined) {
-            notes.sort(
-                (c1, c2) => c1.date.localeCompare(c2.date) * gSortBy.date
-            )
-        }
-
+        // if (gPageIdx !== undefined) {
+        //     const startIdx = gPageIdx * PAGE_SIZE
+        //     notes = notes.slice(startIdx, startIdx + PAGE_SIZE)
+        // }
+        // else if (gSortBy.txt !== undefined) {
+        //     notes.sort(
+        //         (c1, c2) => c1.date.localeCompare(c2.date) * gSortBy.date
+        //     )
+        // }
+        console.log('notes:', notes)
         return notes
     })
 }
@@ -136,11 +96,44 @@ function getNextNoteId(noteId) {
 function _createNotes() {
     let notes = utilService.loadFromStorage(NOTES_KEY)
     if (!notes || !notes.length) {
-        notes = []
-        notes.push(_createNote())
-        notes.push(_createNote())
-        notes.push(_createNote())
-        notes.push(_createNote())
+        const notes = [
+            {
+                id: 'n101',
+                createdAt: 1112222,
+                type: 'NoteTxt',
+                isPinned: true,
+                style: {
+                    backgroundColor: '#00d',
+                },
+                info: {
+                    txt: 'Fullstack Me Baby!'
+                }
+            },
+            {
+                id: 'n102',
+                type: 'NoteImg',
+                isPinned: false,
+                info: {
+                    url: 'http://some-img/me',
+                    title: 'Bobi and Me'
+                },
+                style: {
+                    backgroundColor: '#00d',
+                },
+            },
+            {
+                id: 'n103',
+                type: 'NoteTodos',
+                isPinned: false,
+                info: {
+                    title: 'Get my stuff together',
+                    todos: [
+                        { txt: 'Driving liscence', doneAt: null },
+                        { txt: 'Coding power', doneAt: 187111111 }
+                    ]
+                },
+            },
+        ]
         utilService.saveToStorage(NOTES_KEY, notes)
     }
 }
