@@ -1,8 +1,9 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
+const loggedinUser = { email: 'user@appsus.com', fullname: 'Mahatma Appsus' }
 const MAIL_KEY = 'mailDB'
-var gFilterBy = { txt: '' }
+var gFilterBy = { txt: '', status: 'inbox' }
 
 _createMails()
 
@@ -19,15 +20,33 @@ window.mailService = mailService
 
 function query() {
     return storageService.query(MAIL_KEY)
-        .then(mails => {
-            if (gFilterBy.txt) {
-                const regex = new RegExp(gFilterBy.txt, 'i')
-                mails = mails.filter(mail => regex.test(mail.subject) || regex.test(mail.body))
-            }
-
-            return mails
-        })
-}
+      .then(mails => {
+        if (gFilterBy.txt) {
+          const regex = new RegExp(gFilterBy.txt, 'i')
+          mails = mails.filter(mail => regex.test(mail.subject) || regex.test(mail.body))
+        }
+        if (gFilterBy.status) {
+          switch(gFilterBy.status) {
+            case 'inbox':
+              mails = mails.filter(mail => mail.to === loggedinUser.email && mail.removedAt === null)
+              break
+            case 'starred':
+                mails = mails.filter(mail => mail.isStarred === true)
+                break
+            case 'sent':
+              mails = mails.filter(mail => mail.from === loggedinUser.email)
+              break
+            case 'trash':
+              mails = mails.filter(mail => mail.removedAt !== null)
+              break
+            case 'draft':
+              mails = mails.filter(mail => mail.from === loggedinUser.email && mail.sentAt === null)
+              break
+          }
+        }
+        return mails
+      })
+  }
 
 function get(mailId) {
     return storageService.get(MAIL_KEY, mailId)
@@ -60,15 +79,58 @@ function getFilterBy() {
 
 function setFilterBy(filterBy = {}) {
     if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
+    if (filterBy.status !== undefined) gFilterBy.status = filterBy.status
     return gFilterBy
-}
+  }
 
-function _createMails() {
+  function _createMails() {
     let mails = utilService.loadFromStorage(MAIL_KEY)
     if (!mails || !mails.length) {
         mails = [
-            { id: utilService.makeId(), subject: 'Welcome!', body: 'Welcome to our new mail app!', sentAt: Date.now() },
-            { id: utilService.makeId(), subject: 'Hello!', body: 'Hello world!', sentAt: Date.now() },
+            { 
+                id: utilService.makeId(), 
+                subject: 'Welcome!', 
+                body: 'Welcome to our new mail app!', 
+                isRead: false,
+                isStarred: true,
+                sentAt: Date.now(), 
+                removedAt: null,
+                from: 'user@appsus.com',
+                to: 'test@test.com'
+            },
+            { 
+                id: utilService.makeId(), 
+                subject: 'Hello!', 
+                body: 'Hello world!', 
+                isRead: false,
+                isStarred: false,
+                sentAt: Date.now(), 
+                removedAt: null,
+                from: 'test@test.com',
+                to: 'user@appsus.com'
+            },
+            {
+                id: utilService.makeId(), 
+                subject: 'Draft Email', 
+                body: 'This is a draft email.', 
+                isRead: false,
+                isStarred: false,
+                sentAt: null, 
+                removedAt: null,
+                from: 'user@appsus.com',
+                to: 'test@test.com'
+            },
+            {
+                id: utilService.makeId(), 
+                subject: 'Trashed Email', 
+                body: 'This is a trashed email.', 
+                isRead: false,
+                isStarred: false,
+                sentAt: Date.now(), 
+                removedAt: Date.now(),
+                from: 'test@test.com',
+                to: 'user@appsus.com'
+            },
         ]
         utilService.saveToStorage(MAIL_KEY, mails)
     }
