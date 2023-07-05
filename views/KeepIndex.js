@@ -1,13 +1,13 @@
-import MenuBar from '../apps/keep/cmps/MenuBar.js';
-import MenuButtons from '../apps/keep/cmps/MenuButtons.js';
+import NavBar from '../apps/keep/cmps/NavBar.js';
+import KeepMenu from '../apps/keep/cmps/KeepMenu.js';
 import { noteService } from "../services/note.service.js"
 import NoteList from "../apps/keep/cmps/NoteList.js"
 
 export default {
     template: `
         <section class="keep-options-bar">
-            <MenuBar />
-            <MenuButtons />    
+            <NavBar />
+            <KeepMenu />    
         </section>
         <section class="keep-index">
             <NoteList 
@@ -26,7 +26,7 @@ export default {
     },
     components: {
         NoteList,
-        MenuBar,
-        MenuButtons
+        NavBar,
+        KeepMenu
     }
 }
