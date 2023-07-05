@@ -34,7 +34,7 @@ function query() {
                 mails = mails.filter(mail => mail.isStarred === true)
                 break
             case 'sent':
-              mails = mails.filter(mail => mail.from === loggedinUser.email)
+              mails = mails.filter(mail => mail.from === loggedinUser.email && mail.sentAt)
               break
             case 'trash':
               mails = mails.filter(mail => mail.removedAt !== null)

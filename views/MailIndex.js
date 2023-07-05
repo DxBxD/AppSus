@@ -10,7 +10,7 @@ export default {
             <NavBar @search="onSearch"/>
             <MailMenu @filter="onFilter"/>
             <MailSort @sort="onSort"/>
-            <MailList :mails="mails"/>
+            <MailList :mails="mails" @starred="onMailStarred"/>
         </section>
     `,
     components: {
@@ -47,6 +47,9 @@ export default {
                     console.log('Fetched mails:', mails)
                     this.mails = mails
                 })
+        },
+        onMailStarred(starredMail) {
+            mailService.save(starredMail).then(this.fetchMails)
         }
     }
 }
