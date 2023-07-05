@@ -16,6 +16,6 @@ export default {
         }
     },
     components: {
-        NoteList
+        notes,
     }
 }
