@@ -73,7 +73,7 @@ function save(note) {
     }
 }
 
-function getEmptyNote(id = '', type = '', info) {
+function getEmptyNote(id = '', type = '', info = {}) {
     return { id, type, info }
 }
 

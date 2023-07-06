@@ -1,18 +1,17 @@
-import NavBar from '../apps/keep/cmps/NavBar.js';
-import KeepMenu from '../apps/keep/cmps/KeepMenu.js';
+import AddNote from '../apps/keep/cmps/AddNote.js'
 import { noteService } from "../services/note.service.js"
 import NoteList from "../apps/keep/cmps/NoteList.js"
 
 export default {
     template: `
         <section class="keep-options-bar">
-            <NavBar />
-            <KeepMenu />    
+            <AddNote @noteAdded="addNote"/>
         </section>
         <section class="keep-index">
             <NoteList 
                 v-if="notes"
-                :notes="notes"/>
+                :notes="notes" 
+                @removeNote="removeNote()"/>
         </section>
     `,
     data() {
@@ -21,14 +20,25 @@ export default {
         }
     },
     created() {
-        noteService.query()
-            .then(notes => this.notes = notes)
+        this.fetchNotes()
+    },
+    methods: {
+        fetchNotes() {
+            noteService.query()
+                .then(notes => this.notes = notes)
+                .catch(err => {
+                    console.error('Error fetching notes:', err)
+                })
+        },
+        addNote() {
+            this.fetchNotes()
+        },
+        removeNote() {
+            this.fetchNotes()
+        }
     },
     components: {
         NoteList,
-        NavBar,
-        KeepMenu
+        AddNote
     }
 }
-
-

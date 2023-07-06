@@ -3,7 +3,10 @@
     display: flex;
     overflow: hidden;
     height: 100vh;
-}
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: row;
+    }   
 
 ul {
     list-style: none;
@@ -38,10 +41,8 @@ ul {
     align-items: center;
 }
 
-.keep-menu{
+.keep-menu {
     padding-left: 1em;
 }
 
-.create-note-input{
-    
-}
+.create-note-input {}
