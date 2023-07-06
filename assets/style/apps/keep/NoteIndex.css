@@ -1,11 +1,11 @@
-.keep-index {
+.note-list {
     background-color: #202124;
-    display: flex;
     overflow: hidden;
     height: 100vh;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    flex-direction: row;
+        column-count: 4;
+        column-fill: inherit;
+        width: fit-content;
+        margin-top: 40px;
 }
 
 ul {
@@ -29,6 +29,7 @@ ul {
     overflow: hidden;
     cursor: pointer;
     border: 1px solid transparent;
+    break-inside: avoid-column;
 }
 
 .note:hover {

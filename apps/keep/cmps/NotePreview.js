@@ -4,7 +4,7 @@ import { noteService } from "../../../services/note.service.js"
 export default {
     props: ['note'],
     template: `
-    <section class="note-preview">
+    <!-- <section class="note-preview"> -->
         <article class="note" :style="{ backgroundColor: note.info.backgroundColor || 'defaultColor' }"> 
             <p> {{ note.info.txt }} </p> 
             <section class="note-btns">
@@ -14,7 +14,7 @@ export default {
                 <button class="pin-note-btn"><span class="material-icons">push_pin</span></button>
             </section>
         </article>
-    </section>
+    <!-- </section> -->
     `,
     methods: {
         removeNote() {
