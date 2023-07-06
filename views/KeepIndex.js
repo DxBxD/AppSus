@@ -11,8 +11,10 @@ export default {
             <NoteList 
                 v-if="notes"
                 :notes="notes" 
-                @removeNote="removeNote()"/>
+                @removeNote="removeNote()"
+                @openNote="openNote"/>
         </section>
+        <router-view/>
     `,
     data() {
         return {
@@ -35,6 +37,11 @@ export default {
         },
         removeNote() {
             this.fetchNotes()
+        },
+        openNote(id) {
+            console.log('id:', id)
+            // this.$router.push(`keep/n101`)
+
         }
     },
     components: {

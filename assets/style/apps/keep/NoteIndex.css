@@ -6,7 +6,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     flex-direction: row;
-    }   
+}
 
 ul {
     list-style: none;
@@ -14,6 +14,7 @@ ul {
 }
 
 .note {
+    position: relative;
     background-color: bisque;
     height: 12em;
     padding-top: 1em;
@@ -25,6 +26,14 @@ ul {
     width: 300px;
     border-radius: 5px;
     word-break: break-all;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.note:hover {
+    border: 1px solid #000000;
+    background-color: rgb(252, 209, 157);
 }
 
 .note p {
@@ -45,4 +54,84 @@ ul {
     padding-left: 1em;
 }
 
-.create-note-input {}
+.remove-note-btn {
+    position: absolute;
+    visibility: hidden;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 2em;
+    right: 10px;
+    bottom: 10px;
+}
+
+.edit-note-btn {
+    position: absolute;
+    visibility: hidden;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 2em;
+
+}
+
+.color-palette-input {
+    position: absolute;
+    visibility: hidden;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 2em;
+}
+
+.pin-note-btn {
+    position: absolute;
+    visibility: hidden;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 2em;
+}
+
+
+.note:hover .remove-note-btn {
+    visibility: visible;
+}
+
+.note:hover .edit-note-btn {
+    visibility: visible;
+    right: 1.2em;
+    bottom: 10px;
+}
+
+.note:hover .color-palette-input {
+    visibility: visible;
+    right: 2.2em;
+    bottom: 10px;
+}
+
+.note:hover .pin-note-btn {
+    visibility: visible;
+    right: 3.2em;
+    bottom: 10px;
+}
+
+.remove-note-btn:hover {
+    color: #be2626;
+}   
+
+.edit-note-btn:hover {
+    color: #be2626;
+}
+
+.color-palette-btn:hover {
+    color: #be2626;
+}
+
+.pin-note-btn:hover {
+    color: #be2626;
+}

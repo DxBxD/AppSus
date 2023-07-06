@@ -6,7 +6,10 @@ export default {
         <section class="note-list">
             <ul>
                 <li v-for="note in notes" :key="note.id">
-                    <NotePreview :note="note" @removeNote="onRemoveNote()"/>
+                    <NotePreview 
+                        :note="note" 
+                        @removeNote="onRemoveNote"
+                        @click="openNote(note.id)"/>
                 </li>
             </ul>
         </section>
@@ -14,6 +17,9 @@ export default {
     methods: {
         onRemoveNote() {
             this.$emit('removeNote')
+        },
+        openNote(id) {
+            this.$emit('openNote', id)
         }
     },
     components: {

@@ -5,7 +5,7 @@ export default {
     template: `
             <section class="keep-menu">
                 <input v-model="note.info.txt" class="create-note-input" type="text" placeholder="What's on your mind?">
-                <button @click="addNote()" class="add-note-btn">Add note</button> 
+                <button @click="addNote()" class="add-note-btn material-icons">add</button> 
             </section>
             `,
     data() {
