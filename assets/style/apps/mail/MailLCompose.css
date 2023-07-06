@@ -1,0 +1,104 @@
+.compose-form {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 400px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 2;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+}
+
+.compose-form.is-visible {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 0.3s linear;
+}
+
+.compose-form .compose-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    font-weight: bold;
+    color: #202124;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+}
+
+.compose-form .field {
+    display: flex;
+    flex-direction: column;
+}
+
+.compose-form .field label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #5f6368;
+}
+
+.compose-form .field input, 
+.compose-form .field textarea {
+    padding: 10px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'google-sans';
+}
+
+.compose-form button {
+    align-self: flex-end;
+    margin-top: 10px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.compose-form button:hover {
+    background-color: #3c78b5;
+}
+
+.compose-form .close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #74787d;
+    font-size: 24px;
+    width: 0.2em;
+    height: 0.2em;
+    padding: 0;
+    margin: 0;
+}
+
+.compose-form .close-button span {
+    color: #5f6368;
+    font-size: 17px;
+    padding: 0;
+    margin: 0;
+}
+
+.compose-form .close-button:hover span {
+    color: white;
+    padding: 0;
+    margin: 0;
+}
+
+.compose-form .close-button:hover {
+    background-color: #3c78b5;
+    width: 0.2em;
+    height: 0.2em;
+    padding: 0;
+    margin: 0;
+}

@@ -9,7 +9,7 @@ export default {
     template: `
         <section class="mail-page">
             <div class="mail-logo" @click="onFilter('inbox')"><RouterLink to="/mail">MisterEmail</RouterLink></div>
-            <div class="mail-compose"><MailCompose/></div>
+            <div class="mail-compose"><MailCompose @send="onSendMail"/></div>
             <NavBar @search="onSearch"/>
             <MailMenu @filter="onFilter"/>
             <MailSort @sort="onSort"/>
@@ -40,10 +40,9 @@ export default {
             mailService.setFilterBy({status: filter})
             this.fetchMails()
         },
-        onSort(type) {
-            // Currently not implemented
-            // mailService.setSortBy(type)
-            // this.fetchMails()
+        onSort(sortObj) {
+            mailService.setSortBy(sortObj)
+            this.fetchMails()
         },
         fetchMails() {
             mailService.query()
@@ -54,6 +53,9 @@ export default {
         },
         onMailStarred(starredMail) {
             mailService.save(starredMail).then(this.fetchMails)
-        }
+        },
+        onSendMail(mail) {
+            mailService.save(mail).then(this.fetchMails)
+        },
     }
 }

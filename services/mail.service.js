@@ -3,7 +3,8 @@ import { storageService } from './async-storage.service.js'
 
 const loggedinUser = { email: 'mahatma@appsus.com', fullname: 'Mahatma Appsus' }
 const MAIL_KEY = 'mailDB'
-var gFilterBy = { txt: '', status: 'inbox' }
+let gFilterBy = { txt: '', status: 'inbox' }
+let gSortBy = { type: 'sentAt', order: true }
 
 _createMails()
 
@@ -15,6 +16,7 @@ export const mailService = {
     getNextMailId,
     getFilterBy,
     setFilterBy,
+    setSortBy
 }
 window.mailService = mailService
 
@@ -44,9 +46,20 @@ function query() {
                 break
           }
         }
+        mails.sort((a, b) => {
+            if (gSortBy.type === 'sentAt') {
+                if (a[gSortBy.type] < b[gSortBy.type]) return gSortBy.order ? 1 : -1
+                if (a[gSortBy.type] > b[gSortBy.type]) return gSortBy.order ? -1 : 1
+            } else {
+                if (a[gSortBy.type] < b[gSortBy.type]) return gSortBy.order ? -1 : 1
+                if (a[gSortBy.type] > b[gSortBy.type]) return gSortBy.order ? 1 : -1
+            }
+            return 0
+        })
         return mails
-      })
-  }
+    })
+}
+
 
 function get(mailId) {
     return storageService.get(MAIL_KEY, mailId)
@@ -81,7 +94,11 @@ function setFilterBy(filterBy = {}) {
     if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
     if (filterBy.status !== undefined) gFilterBy.status = filterBy.status
     return gFilterBy
-  }
+}
+
+function setSortBy({ type, order }) {
+    gSortBy = { type, order }
+}
 
   function _createMails() {
     let mails = utilService.loadFromStorage(MAIL_KEY)
@@ -94,6 +111,7 @@ function setFilterBy(filterBy = {}) {
                 isRead: false,
                 isStarred: true,
                 sentAt: Date.now(), 
+                status: 'sent',
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'test@test.com'
@@ -104,7 +122,8 @@ function setFilterBy(filterBy = {}) {
                 body: 'Hello world!', 
                 isRead: false,
                 isStarred: false,
-                sentAt: 1688475453161, 
+                sentAt: 1688475453161,
+                status: 'sent', 
                 removedAt: null,
                 from: 'test@test.com',
                 to: 'mahatma@appsus.com'
@@ -116,6 +135,7 @@ function setFilterBy(filterBy = {}) {
                 isRead: false,
                 isStarred: false,
                 sentAt: null, 
+                status: 'draft',
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'test@test.com'
@@ -126,7 +146,8 @@ function setFilterBy(filterBy = {}) {
                 body: 'This is a trashed email.', 
                 isRead: false,
                 isStarred: false,
-                sentAt: 1628575453161, 
+                sentAt: 1628575453161,
+                status: 'sent', 
                 removedAt: 1628575453161,
                 from: 'test@test.com',
                 to: 'mahatma@appsus.com'
@@ -138,6 +159,7 @@ function setFilterBy(filterBy = {}) {
                 isRead: false,
                 isStarred: false,
                 sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
                 removedAt: null,
                 from: 'john@example.com',
                 to: 'mahatma@appsus.com',
@@ -149,6 +171,7 @@ function setFilterBy(filterBy = {}) {
                 isRead: false,
                 isStarred: true,
                 sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
                 removedAt: null,
                 from: 'marketing@example.com',
                 to: 'mahatma@appsus.com',
@@ -160,6 +183,7 @@ function setFilterBy(filterBy = {}) {
                 isRead: false,
                 isStarred: false,
                 sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
                 removedAt: null,
                 from: 'sarah@example.com',
                 to: 'mahatma@appsus.com',
@@ -171,6 +195,7 @@ function setFilterBy(filterBy = {}) {
                 isRead: false,
                 isStarred: true,
                 sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
                 removedAt: null,
                 from: 'hr@example.com',
                 to: 'mahatma@appsus.com',
@@ -182,6 +207,7 @@ function setFilterBy(filterBy = {}) {
                 isRead: false,
                 isStarred: false,
                 sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
                 removedAt: null,
                 from: 'travel@example.com',
                 to: 'mahatma@appsus.com',
@@ -193,6 +219,7 @@ function setFilterBy(filterBy = {}) {
                 isRead: false,
                 isStarred: true,
                 sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
                 removedAt: null,
                 from: 'product@example.com',
                 to: 'mahatma@appsus.com',
@@ -204,6 +231,7 @@ function setFilterBy(filterBy = {}) {
                 isRead: false,
                 isStarred: false,
                 sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
                 removedAt: null,
                 from: 'finance@example.com',
                 to: 'mahatma@appsus.com',
