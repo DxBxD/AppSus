@@ -18,6 +18,8 @@ export const noteService = {
     getNextNoteId,
     getFilterBy,
     setFilterBy,
+    _createNote,
+    getEmptyNote,
 }
 window.noteService = noteService
 
@@ -71,8 +73,8 @@ function save(note) {
     }
 }
 
-function getEmptyNote() {
-    return { id: '' }
+function getEmptyNote(id = '', type = '', info) {
+    return { id, type, info }
 }
 
 function getFilterBy() {
@@ -138,8 +140,9 @@ function _createNotes() {
     }
 }
 
-function _createNote() {
+function _createNote(txt = '') {
     const note = getEmptyNote()
     note.id = utilService.makeId()
+    note.info = { txt }
     return note
 }
