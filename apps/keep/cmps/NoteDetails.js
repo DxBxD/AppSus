@@ -4,9 +4,10 @@ export default {
     template: `
     <div class="note-details-container" @click="closeModal">
         <section class="note-details" v-if="note">
-            <h2 class="note-title">{{ note.info.title }}</h2>
-            <p class="note-txt">{{ note.info.txt }}</p>
+            <textarea class="note-title" v-model="note.info.title">{{ note.info.title }}</textarea>
+            <textarea class="note-txt">{{ note.info.txt }}</textarea>
             <h4 class="note-date" >Created at: {{ date }}</h4>
+            <button class="save-btn" @click="saveNote">Save</button>
         </section>
     </div>
     `,
@@ -36,6 +37,17 @@ export default {
             if (event.target.classList.contains("note-details-container")) {
                 window.location.href = "/#/keep"
             }
+        },
+        saveNote() {
+            console.log('this.note:', this.note)
+            noteService.save(this.note)
+                .then(() => {
+                    window.location.href = "/#/keep"
+                    window.location.reload()
+                }).catch(err => {
+                    console.error('Error saving note:', err)
+                }
+                )
         }
     },
     created() {
