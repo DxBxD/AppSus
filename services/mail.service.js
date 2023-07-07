@@ -6,6 +6,7 @@ const MAIL_KEY = 'mailDB'
 let gFilterBy = { txt: '', status: 'inbox' }
 let gSortBy = { type: 'sentAt', order: true }
 
+
 _createMails()
 
 export const mailService = {
@@ -16,48 +17,51 @@ export const mailService = {
     getNextMailId,
     getFilterBy,
     setFilterBy,
-    setSortBy
+    setSortBy,
+    createDraft
 }
+
 window.mailService = mailService
+
 
 function query() {
     return storageService.query(MAIL_KEY)
-      .then(mails => {
-        if (gFilterBy.txt) {
-          const regex = new RegExp(gFilterBy.txt, 'i')
-          mails = mails.filter(mail => regex.test(mail.subject) || regex.test(mail.body))
-        }
-        if (gFilterBy.status) {
-          switch(gFilterBy.status) {
-            case 'inbox':
-                mails = mails.filter(mail => mail.to === loggedinUser.email && mail.removedAt === null)
-                break
-            case 'starred':
-                mails = mails.filter(mail => mail.isStarred === true)
-                break
-            case 'sent':
-                mails = mails.filter(mail => mail.from === loggedinUser.email && mail.sentAt)
-                break
-            case 'trash':
-                mails = mails.filter(mail => mail.removedAt !== null)
-                break
-            case 'draft':
-                mails = mails.filter(mail => mail.from === loggedinUser.email && mail.sentAt === null)
-                break
-          }
-        }
-        mails.sort((a, b) => {
-            if (gSortBy.type === 'sentAt') {
-                if (a[gSortBy.type] < b[gSortBy.type]) return gSortBy.order ? 1 : -1
-                if (a[gSortBy.type] > b[gSortBy.type]) return gSortBy.order ? -1 : 1
-            } else {
-                if (a[gSortBy.type] < b[gSortBy.type]) return gSortBy.order ? -1 : 1
-                if (a[gSortBy.type] > b[gSortBy.type]) return gSortBy.order ? 1 : -1
+        .then(mails => {
+            if (gFilterBy.txt) {
+                const regex = new RegExp(gFilterBy.txt, 'i')
+                mails = mails.filter(mail => regex.test(mail.subject) || regex.test(mail.body))
             }
-            return 0
+            if (gFilterBy.status) {
+                switch (gFilterBy.status) {
+                    case 'inbox':
+                        mails = mails.filter(mail => mail.to === loggedinUser.email && mail.removedAt === null)
+                        break
+                    case 'starred':
+                        mails = mails.filter(mail => mail.isStarred === true)
+                        break
+                    case 'sent':
+                        mails = mails.filter(mail => mail.from === loggedinUser.email && mail.sentAt && mail.status !== 'draft')
+                        break
+                    case 'trash':
+                        mails = mails.filter(mail => mail.removedAt !== null)
+                        break
+                    case 'draft':
+                        mails = mails.filter(mail => mail.from === loggedinUser.email && mail.status === 'draft')
+                        break
+                }
+            }
+            mails.sort((a, b) => {
+                if (gSortBy.type === 'sentAt') {
+                    if (a[gSortBy.type] < b[gSortBy.type]) return gSortBy.order ? 1 : -1
+                    if (a[gSortBy.type] > b[gSortBy.type]) return gSortBy.order ? -1 : 1
+                } else {
+                    if (a[gSortBy.type] < b[gSortBy.type]) return gSortBy.order ? -1 : 1
+                    if (a[gSortBy.type] > b[gSortBy.type]) return gSortBy.order ? 1 : -1
+                }
+                return 0
+            })
+            return mails
         })
-        return mails
-    })
 }
 
 
@@ -65,9 +69,11 @@ function get(mailId) {
     return storageService.get(MAIL_KEY, mailId)
 }
 
+
 function remove(mailId) {
     return storageService.remove(MAIL_KEY, mailId)
 }
+
 
 function save(mail) {
     if (mail.id) {
@@ -76,6 +82,7 @@ function save(mail) {
         return storageService.post(MAIL_KEY, mail)
     }
 }
+
 
 function getNextMailId(mailId) {
     return storageService.query(MAIL_KEY)
@@ -86,9 +93,11 @@ function getNextMailId(mailId) {
         })
 }
 
+
 function getFilterBy() {
     return { ...gFilterBy }
 }
+
 
 function setFilterBy(filterBy = {}) {
     if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
@@ -96,58 +105,77 @@ function setFilterBy(filterBy = {}) {
     return gFilterBy
 }
 
+
 function setSortBy({ type, order }) {
     gSortBy = { type, order }
 }
 
-  function _createMails() {
+
+function createDraft() {
+    const draft = {
+        id: utilService.makeId(),
+        subject: '',
+        body: '',
+        isRead: false,
+        isStarred: false,
+        sentAt: Date.now(),
+        status: 'draft',
+        removedAt: null,
+        from: loggedinUser.email,
+        to: ''
+    }
+    return storageService.postWithId(MAIL_KEY, draft)
+}
+
+
+function _createMails() {
     let mails = utilService.loadFromStorage(MAIL_KEY)
     if (!mails || !mails.length) {
         mails = [
-            { 
-                id: utilService.makeId(), 
-                subject: 'Welcome!', 
-                body: 'Welcome to our new mail app!', 
+            {
+                id: utilService.makeId(),
+                subject: 'Welcome!',
+                body: 'Welcome to our new mail app!',
                 isRead: false,
                 isStarred: true,
-                sentAt: Date.now(), 
+                sentAt: Date.now(),
                 status: 'sent',
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'test@test.com'
             },
-            { 
-                id: utilService.makeId(), 
-                subject: 'Hello!', 
-                body: 'Hello world!', 
+            {
+                id: utilService.makeId(),
+                subject: 'Hello!',
+                body: 'Hello world!',
                 isRead: false,
                 isStarred: false,
                 sentAt: 1688475453161,
-                status: 'sent', 
+                status: 'sent',
                 removedAt: null,
                 from: 'test@test.com',
                 to: 'mahatma@appsus.com'
             },
             {
-                id: utilService.makeId(), 
-                subject: 'Draft Email', 
-                body: 'This is a draft email.', 
+                id: utilService.makeId(),
+                subject: 'Draft Email',
+                body: 'This is a draft email.',
                 isRead: false,
                 isStarred: false,
-                sentAt: null, 
+                sentAt: null,
                 status: 'draft',
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'test@test.com'
             },
             {
-                id: utilService.makeId(), 
-                subject: 'Trashed Email', 
-                body: 'This is a trashed email.', 
+                id: utilService.makeId(),
+                subject: 'Trashed Email',
+                body: 'This is a trashed email.',
                 isRead: false,
                 isStarred: false,
                 sentAt: 1628575453161,
-                status: 'sent', 
+                status: 'sent',
                 removedAt: 1628575453161,
                 from: 'test@test.com',
                 to: 'mahatma@appsus.com'
@@ -163,8 +191,8 @@ function setSortBy({ type, order }) {
                 removedAt: null,
                 from: 'john@example.com',
                 to: 'mahatma@appsus.com',
-              },
-              {
+            },
+            {
                 id: utilService.makeId(),
                 subject: 'Important Announcement',
                 body: 'Hi there, We have an important announcement to make regarding upcoming changes in our company. Please check your email for further details. Regards, Marketing Team',
@@ -175,8 +203,8 @@ function setSortBy({ type, order }) {
                 removedAt: null,
                 from: 'marketing@example.com',
                 to: 'mahatma@appsus.com',
-              },
-              {
+            },
+            {
                 id: utilService.makeId(),
                 subject: 'Meeting Reminder',
                 body: 'Dear Mahatma, This is a reminder for our meeting scheduled for next week. Please make sure to be prepared. Regards, Sarah',
@@ -187,8 +215,8 @@ function setSortBy({ type, order }) {
                 removedAt: null,
                 from: 'sarah@example.com',
                 to: 'mahatma@appsus.com',
-              },
-              {
+            },
+            {
                 id: utilService.makeId(),
                 subject: 'Job Opportunity',
                 body: 'Hi Mahatma, We have a job opening that might interest you. Please check the attached job description and let us know if you are interested. Best regards, HR Department',
@@ -199,8 +227,8 @@ function setSortBy({ type, order }) {
                 removedAt: null,
                 from: 'hr@example.com',
                 to: 'mahatma@appsus.com',
-              },
-              {
+            },
+            {
                 id: utilService.makeId(),
                 subject: 'Vacation Package Offers',
                 body: 'Dear Mahatma, Plan your dream vacation with our exclusive offers. Check out the attached brochure for more details. Happy travels! Regards, Travel Agency',
@@ -211,8 +239,8 @@ function setSortBy({ type, order }) {
                 removedAt: null,
                 from: 'travel@example.com',
                 to: 'mahatma@appsus.com',
-              },
-              {
+            },
+            {
                 id: utilService.makeId(),
                 subject: 'Product Update',
                 body: 'Hi there, We have released a new version of our product with exciting features and improvements. Please update your application to enjoy the latest enhancements. Regards, Product Team',
@@ -223,8 +251,8 @@ function setSortBy({ type, order }) {
                 removedAt: null,
                 from: 'product@example.com',
                 to: 'mahatma@appsus.com',
-              },
-              {
+            },
+            {
                 id: utilService.makeId(),
                 subject: 'Payment Confirmation',
                 body: 'Dear Mahatma, Your payment has been successfully processed. Thank you for your purchase. For any inquiries, please contact our support team. Best regards, Finance Department',
@@ -235,7 +263,7 @@ function setSortBy({ type, order }) {
                 removedAt: null,
                 from: 'finance@example.com',
                 to: 'mahatma@appsus.com',
-              },
+            },
         ]
         utilService.saveToStorage(MAIL_KEY, mails)
     }

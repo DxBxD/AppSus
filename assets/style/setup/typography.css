@@ -10,6 +10,34 @@
     src: url('../../fonts/roboto-slab/RobotoSlab-VariableFont_wght.ttf');
 }
 
+@font-face {
+    font-family: roboto;
+    src: url('../../fonts/roboto/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: roboto;
+    src: url('../../fonts/roboto/Roboto-Bold.ttf');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: roboto;
+    src: url('../../fonts/roboto/Roboto-Black.ttf');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: roboto;
+    src: url('../../fonts/roboto/Roboto-Medium.ttf');
+    font-weight: 400;
+}
+@font-face {
+    font-family: roboto;
+    src: url('../../fonts/roboto/Roboto-Regular.ttf');
+    font-weight: 300;
+}
+
 .material-icons {
     font-size: 24px;
     vertical-align: middle;

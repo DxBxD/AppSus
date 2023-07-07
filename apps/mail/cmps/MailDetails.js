@@ -9,7 +9,7 @@ export default {
             <div class="mail-meta">
                 <div class="mail-from">From: {{ mail.from }}</div>
                 <div class="mail-to">To: {{ mail.to }}</div>
-                <div class="mail-date">{{ isSentOrReceived }} {{ formattedDate }}</div>
+                <div class="mail-date">{{ dateLabel }} {{ formattedDate }}</div>
             </div>
             <div class="mail-body">{{ mail.body }}</div>
         </section>
@@ -17,7 +17,7 @@ export default {
     data() {
         return {
             mail: null,
-            isSentOrReceived: '',
+            dateLabel: '',
             formattedDate: null
         }
     },
@@ -26,10 +26,15 @@ export default {
             const { mailId } = this.$route.params
             mailService.get(mailId).then(mail => {
                 this.mail = mail
+                const date = new Date(this.mail.sentAt)
                 if (this.mail.sentAt) {
-                    this.mail.to === loggedinUserMail ? this.isSentOrReceived = 'Received: ' : this.isSentOrReceived = 'Sent: '
-                    const date = new Date(this.mail.sentAt)
-                    this.formattedDate = date.toDateString()
+                    if (this.mail.status === 'draft') {
+                        this.dateLabel = 'Last Edit: '
+                        this.formattedDate = date.toLocaleString()
+                    } else {
+                        this.mail.to === loggedinUserMail ? this.dateLabel = 'Received: ' : this.dateLabel = 'Sent: '
+                        this.formattedDate = date.toDateString()
+                    }
                 }
             })
         }

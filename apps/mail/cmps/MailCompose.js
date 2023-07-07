@@ -1,15 +1,17 @@
+import { mailService } from "../../../services/mail.service.js"
+
 export default {
     template: `
         <div>
-            <button class="compose-button" @click="showForm = !showForm"><span class="material-icons">edit</span>Compose</button>
-            <form class="compose-form" :class="{ 'is-visible': showForm }" @submit.prevent="submitForm" novalidate>
+            <button class="compose-button" @click="composeMail"><span class="material-icons">edit</span>Compose</button>
+            <form class="compose-form" :class="{ 'is-visible': showForm }" @submit.prevent="sendMail"  novalidate>
                 <div class="compose-header">
                     New Message
-                    <button class="close-button" @click="closeForm"><span class="material-icons">close</span></button>
+                    <button type="button" class="close-button" @click="closeForm"><span class="material-icons">close</span></button>
                 </div>
                 <div class="field">
                     <label>To</label>
-                    <input type="email" v-model="to" placeholder="To:" required/>
+                    <input type="email" v-model="mail.to" @blur="updateMail" placeholder="To:" required/>
                 </div>
                 <div class="field">
                     <label>From</label>
@@ -17,11 +19,11 @@ export default {
                 </div>
                 <div class="field">
                     <label>Subject</label>
-                    <input type="text" v-model="subject" placeholder="Subject:" required/>
+                    <input type="text" v-model="mail.subject" @blur="updateMail" placeholder="Subject:" required/>
                 </div>
                 <div class="field">
                     <label>Body</label>
-                    <textarea v-model="body" placeholder="Body:" required></textarea>
+                    <textarea v-model="mail.body" @blur="updateMail" placeholder="Body:" required></textarea>
                 </div>
                 <button type="submit">Send</button>
             </form>
@@ -29,34 +31,62 @@ export default {
     `,
     data() {
         return {
-            to: '',
-            subject: '',
-            body: '',
+            mail: {},
             showForm: false
         }
     },
     methods: {
-        submitForm() {
-            this.$emit('send', {
-                to: this.to,
-                from: 'mahatma@appsus.com',
-                subject: this.subject,
-                body: this.body,
-                sentAt: Date.now(),
-                isStarred: false,
-                removedAt: null
-            })
-            this.to = ''
-            this.subject = ''
-            this.body = ''
-            this.showForm = false
-            this.status = 'sent'
+        composeMail() {
+            if(this.showForm) {
+                this.closeForm()
+                return
+            }
+            const mailId = this.$route.params.mailId
+            if (mailId) {
+               mailService.get(mailId)
+                    .then(mail => {
+                        if (mail.status === 'draft') {
+                            this.mail = mail
+                            this.showForm = true
+                        } else {
+                            this.createAndShowDraft()
+                        }
+                    })
+            } else {
+                this.createAndShowDraft()
+            }
+        },
+        createAndShowDraft() {
+            mailService.createDraft()
+                .then(draft => {
+                    this.mail = draft
+                    this.showForm = true
+                })
+        },
+        updateMail() {
+            mailService.save(this.mail)
+                .then(savedMail => {
+                    this.mail = savedMail
+                })
         },
         closeForm() {
-            this.showForm = false
-            this.to = ''
-            this.subject = ''
-            this.body = ''
+            mailService.save(this.mail)
+                .then(savedMail => {
+                    console.log(savedMail, 'was saved as a draft')
+                    this.mail = {}
+                    this.showForm = false
+                    this.$router.push({ query: {} })
+                })
+        },
+        sendMail() {
+            console.log('mail sent')
+            this.mail.status = 'sent'
+            this.mail.sentAt = Date.now()
+            mailService.save(this.mail)
+                .then(() => {
+                    this.mail = {}
+                    this.showForm = false
+                })
         }
     }
 }

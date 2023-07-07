@@ -13,7 +13,7 @@ export default {
             <NavBar @search="onSearch"/>
             <MailMenu @filter="onFilter"/>
             <MailSort @sort="onSort"/>
-            <RouterView :mails="mails" @starred="onMailStarred"/>
+            <RouterView :mails="mails" @opened="onMailOpened" @starred="onMailStarred"/>
         </section>
     `,
     components: {
@@ -25,7 +25,7 @@ export default {
     },
     data() {
         return {
-            mails: []
+            mails: [],
         }
     },
     created() {
@@ -53,6 +53,10 @@ export default {
         },
         onMailStarred(starredMail) {
             mailService.save(starredMail).then(this.fetchMails)
+        },
+        onMailOpened(openedMail) {
+            console.log(openedMail.isRead)
+            mailService.save(openedMail).then(this.fetchMails)
         },
         onSendMail(mail) {
             mailService.save(mail).then(this.fetchMails)

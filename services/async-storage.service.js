@@ -2,6 +2,7 @@ export const storageService = {
     query,
     get,
     post,
+    postWithId,
     put,
     remove,
 }
@@ -23,6 +24,19 @@ function post(entityType, newEntity, append = true) {
     newEntity.id = _makeId()
     return query(entityType).then(entities => {
         append ? entities.push(newEntity) : entities.unshift(newEntity)
+        _save(entityType, entities)
+        return newEntity
+    })
+}
+
+function postWithId(entityType, newEntity) {
+    newEntity = JSON.parse(JSON.stringify(newEntity)) 
+    return query(entityType).then(entities => {
+        const entityExists = entities.some(entity => entity.id === newEntity.id)
+        if (entityExists) {
+            throw new Error(`Entity with id: ${newEntity.id} already exists`)
+        }
+        entities.push(newEntity)
         _save(entityType, entities)
         return newEntity
     })

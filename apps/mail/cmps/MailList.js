@@ -4,18 +4,18 @@ export default {
     props: ['mails'],
     template: `
         <section class="mail-list">
-            <MailPreview v-for="mail in mails" :key="mail.id" :mail="mail" @clicked="onMailClick" @starred="onMailStarred" />
+            <MailPreview v-for="mail in mails" :key="mail.id" :mail="mail" @opened="onMailOpened" @starred="onMailStarred" />
         </section>
     `,
     components: {
         MailPreview
     },
     methods: {
-        onMailClick(selectedMail) {
-            ///////////////////////
-        },
         onMailStarred(starredMail) {
             this.$emit('starred', starredMail)
+        },
+        onMailOpened(openedMail) {
+            this.$emit('opened', openedMail)
         }
     },
     watch: {

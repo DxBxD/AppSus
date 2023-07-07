@@ -1,10 +1,11 @@
 export default {
     props: ['mail'],
     template: `
-        <div class="mail-preview" @click.stop="onOpenMail">
+        <div class="mail-preview" :class="readClass" @click.stop="onOpenMail">
             <span class="icons" @click.stop="onToggleStar">
                 <span class="material-icons">{{ mail.isStarred ? 'star' : 'star_border' }}</span>
             </span>
+            <span class="contact">{{ this.mail.from === 'mahatma@appsus.com' ? 'To: ' + this.mail.to : this.mail.from}}</span>
             <span class="title">{{ mail.subject }}</span>
             <span class="snippet">{{ mail.body }}</span>
             <span class="date">{{ formattedDate }}</span>
@@ -25,10 +26,19 @@ export default {
             }
     
             return formattedDate
+        },
+        readClass() {
+            if (this.mail.isRead) {
+                return 'read'
+            } else {
+            return ''
+            }
         }
     },
     methods: {
         onOpenMail() {
+            this.mail.isRead = true
+            this.$emit('opened', this.mail)
             this.$router.push(`/mail/${this.mail.id}`)
         },
         onToggleStar() {
