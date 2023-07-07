@@ -1,5 +1,8 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
+import { eventBus } from './event-bus.service.js'
+
+
 
 const NOTES_KEY = 'notesDB'
 
@@ -24,23 +27,7 @@ export const noteService = {
 window.noteService = noteService
 
 function query() {
-    return storageService.query(NOTES_KEY).then(notes => {
-        // if (gFilterBy.txt) {
-        //     const regex = new RegExp(gFilterBy.txt, 'i')
-        //     notes = notes.filter(notes => regex.test(notes.date))
-        // }
-
-        // if (gPageIdx !== undefined) {
-        //     const startIdx = gPageIdx * PAGE_SIZE
-        //     notes = notes.slice(startIdx, startIdx + PAGE_SIZE)
-        // }
-        // else if (gSortBy.txt !== undefined) {
-        //     notes.sort(
-        //         (c1, c2) => c1.date.localeCompare(c2.date) * gSortBy.date
-        //     )
-        // }
-        return notes
-    })
+    return storageService.query(NOTES_KEY)
 }
 
 function get(noteId) {
@@ -60,16 +47,28 @@ function _setNextPrevNoteId(note) {
         })
 }
 
-function remove(noteId) {
-    return storageService.remove(NOTES_KEY, noteId)
-}
-
 function save(note) {
     if (note.id) {
         return storageService.put(NOTES_KEY, note)
+            .then(() => {
+                eventBus.emit('update-notes')
+                return query()
+            })
     } else {
         return storageService.post(NOTES_KEY, note)
+            .then(() => {
+                eventBus.emit('update-notes')
+                return query()
+            })
     }
+}
+
+function remove(noteId) {
+    return storageService.remove(NOTES_KEY, noteId)
+        .then(() => {
+            eventBus.emit('update-notes')
+            return query()
+        })
 }
 
 function getEmptyNote(id = '', type = '', info = {}) {

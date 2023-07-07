@@ -42,6 +42,7 @@ export default {
             noteService.save(this.note)
                 .then(() => {
                     window.location.href = "/#/keep"
+                    // window.location.reload()
                 }).catch(err => {
                     console.error('Error saving note:', err)
                 })
