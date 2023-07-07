@@ -35,19 +35,16 @@ export default {
         },
         closeModal(event) {
             if (event.target.classList.contains("note-details-container")) {
-                window.location.href = "/#/keep"
+                this.$router.push('/keep')
             }
         },
         saveNote() {
-            console.log('this.note:', this.note)
             noteService.save(this.note)
                 .then(() => {
                     window.location.href = "/#/keep"
-                    window.location.reload()
                 }).catch(err => {
                     console.error('Error saving note:', err)
-                }
-                )
+                })
         }
     },
     created() {

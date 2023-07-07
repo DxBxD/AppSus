@@ -102,7 +102,7 @@ function _createNotes() {
                 id: utilService.makeId(),
                 createdAt: 1112222,
                 type: 'NoteTxt',
-                isPinned: true,
+                isPinned: false,
                 info: {
                     title: 'Sample Title',
                     txt: 'Fullstack Me Baby!'
@@ -125,7 +125,7 @@ function _createNotes() {
                 isPinned: true,
                 info: {
                     title: 'Sample Title',
-                    txt: 'Fullstack Me Baby!'
+                    txt: 'Do NOT! Fullstack Me Baby!'
                 }
             },
 
