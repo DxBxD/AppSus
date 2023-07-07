@@ -6,7 +6,6 @@ import { eventBus } from "../services/event-bus.service.js"
 
 // TODO - GET HELP ON LAYOUT
 // TODO - how to see text change without reloading?.
-// TODO - Add Pin feature, render by pin.
 // TODO - add buttons to modal
 // TODO - add filters
 // TODO - add duplicate
@@ -23,11 +22,11 @@ export default {
         <section class="keep-options-bar">
             <AddNote @noteAdded="addNote"/>
         </section>
-            <NoteList 
-                v-if="notes"
-                :notes="notes" 
-                @removeNote="removeNote()"
-                @openNote="openNote"/>
+        <NoteList 
+            v-if="sortedNotes.length"
+            :notes="sortedNotes" 
+            @removeNote="removeNote()"
+            @openNote="openNote"/>
         </section>
         <router-view/>
     `,
@@ -74,6 +73,11 @@ export default {
             }
         }
 
+    },
+    computed: {
+        sortedNotes() {
+            return this.notes.sort((a, b) => b.isPinned - a.isPinned)
+        }
     },
     components: {
         NoteList,

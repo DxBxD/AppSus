@@ -168,3 +168,18 @@ ul {
     font-weight: 400;
     bottom: 0;
 }
+
+.pinned-note{
+    cursor: pointer;
+    border: 1px solid transparent;
+    break-inside: avoid-column;
+    border: 1px solid #ffffff;
+    opacity: 1;
+}
+
+.pinned-note > span{
+    color: #999494;
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+}

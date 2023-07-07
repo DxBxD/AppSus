@@ -3,7 +3,6 @@ import { storageService } from './async-storage.service.js'
 import { eventBus } from './event-bus.service.js'
 
 
-
 const NOTES_KEY = 'notesDB'
 
 // TODO - update gFilterBy & gSortBy
@@ -23,6 +22,7 @@ export const noteService = {
     setFilterBy,
     _createNote,
     getEmptyNote,
+    updateIsPinned
 }
 window.noteService = noteService
 
@@ -139,4 +139,15 @@ function _createNote(txt = '') {
     note.info = { txt }
     note.style.backgroundColor = '#00d'
     return note
+}
+
+function updateIsPinned(noteId, isPinned) {
+    return get(noteId)
+        .then(note => {
+            // create a copy of the note with the new isPinned value
+            const updatedNote = { ...note, isPinned: isPinned }
+
+            // replace the note in the array with the updated note
+            return save(updatedNote)
+        })
 }
