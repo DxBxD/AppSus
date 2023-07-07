@@ -88,6 +88,16 @@ ul {
     font-size: 2em;
 }
 
+.duplicate-note-btn {
+    position: absolute;
+    visibility: hidden;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 2em;
+}
+
 .note:hover .remove-note-btn {
     visibility: visible;
 }
@@ -102,6 +112,16 @@ ul {
     visibility: visible;
     right: 2.2em;
     bottom: 10px;
+}
+
+.note:hover .duplicate-note-btn {
+    visibility: visible;
+    right: 3.2em;
+    bottom: 10px;
+}
+
+.duplicate-note-btn:hover {
+    color: #be2626;
 }
 
 .remove-note-btn:hover {
@@ -169,7 +189,7 @@ ul {
     bottom: 0;
 }
 
-.pinned-note{
+.pinned-note {
     cursor: pointer;
     border: 1px solid transparent;
     break-inside: avoid-column;
@@ -177,7 +197,7 @@ ul {
     opacity: 1;
 }
 
-.pinned-note > span{
+.pinned-note>span {
     color: #999494;
     position: absolute;
     top: 0.5em;

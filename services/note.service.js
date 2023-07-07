@@ -48,6 +48,7 @@ function _setNextPrevNoteId(note) {
 }
 
 function save(note) {
+    console.log('note:',note)
     if (note.id) {
         return storageService.put(NOTES_KEY, note)
             .then(() => {
@@ -71,9 +72,11 @@ function remove(noteId) {
         })
 }
 
-function getEmptyNote(id = '', type = '', info = {}) {
-    return { id, type, info }
+function getEmptyNote(id = '', type = '', info = {}, style = {}) {
+
+    return { id, type, info, style }
 }
+
 
 function getFilterBy() {
     return { ...gFilterBy }
@@ -133,13 +136,15 @@ function _createNotes() {
     }
 }
 
-function _createNote(txt = '') {
+function _createNote(title = '', txt = '', backgroundColor = '#00d') {
     const note = getEmptyNote()
     note.id = utilService.makeId()
-    note.info = { txt }
-    note.style.backgroundColor = '#00d'
-    return note
+    note.info = { txt, title }
+    note.style = { backgroundColor: backgroundColor }
+    return save(note)
 }
+
+
 
 function updateIsPinned(noteId, isPinned) {
     return get(noteId)

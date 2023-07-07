@@ -5,10 +5,8 @@ import { eventBus } from "../services/event-bus.service.js"
 
 
 // TODO - GET HELP ON LAYOUT
-// TODO - how to see text change without reloading?.
 // TODO - add buttons to modal
 // TODO - add filters
-// TODO - add duplicate
 // TODO - add support for images/videos/lists
 // TODO - add title text to creating note
 // TODO - work on ui 
