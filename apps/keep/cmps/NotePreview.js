@@ -9,9 +9,9 @@ export default {
             <h4> {{ note.info.title }} </h4>
             <p> {{ note.info.txt }} </p> 
             <section class="note-btns">
-                <button class="remove-note-btn" @click="removeNote"><span class="material-icons">delete</span></button>
-                <input type="color" class="color-palette-input" @input="changeColor($event)"></button>
-                <button class="pin-note-btn"><span class="material-icons">push_pin</span></button>
+                <button class="remove-note-btn" @click="removeNote" @click.stop><span class="material-icons">delete</span></button>
+                <input type="color" class="color-palette-input" @click.stop @input="changeColor($event)"></button>
+                <button class="pin-note-btn"><span class="material-icons" @click.stop>push_pin</span></button>
             </section>
         </article>
     <!-- </section> -->
@@ -26,7 +26,7 @@ export default {
         changeColor(event) {
             const selectedColor = event.target.value
             this.note.info.backgroundColor = selectedColor
-            noteService.save(this.note)            
+            noteService.save(this.note)          
         }
 
     },

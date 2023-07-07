@@ -3,9 +3,9 @@ import { noteService } from "../../../services/note.service.js";
 export default {
     template: `
     <div class="note-details-container" @click="closeModal">
-        <section class="note-details" v-if="note">
-            <textarea class="note-title" v-model="note.info.title">{{ note.info.title }}</textarea>
-            <textarea class="note-txt">{{ note.info.txt }}</textarea>
+        <section class="note-details" v-if="note" :style="{ backgroundColor: note.info.backgroundColor || 'bisque' }">
+            <textarea class="note-title" v-model="note.info.title" :style="{ backgroundColor: note.info.backgroundColor || 'bisque' }">{{ note.info.title }}</textarea>
+            <textarea class="note-txt" v-model="note.info.txt" :style="{ backgroundColor: note.info.backgroundColor || 'bisque' }">{{ note.info.txt }}</textarea>
             <h4 class="note-date" >Created at: {{ date }}</h4>
             <button class="save-btn" @click="saveNote">Save</button>
         </section>

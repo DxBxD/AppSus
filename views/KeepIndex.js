@@ -3,7 +3,7 @@ import { noteService } from "../services/note.service.js"
 import NoteList from "../apps/keep/cmps/NoteList.js"
 
 // TODO - GET HELP ON LAYOUT
-// TODO - replace with a modal, with a backdrop.
+// TODO - how to see text change without reloading?.
 // TODO - Add Pin feature, render by pin.
 
 
