@@ -1,0 +1,26 @@
+.mail-page {
+    display: grid;
+    grid-template-areas:
+        "logo searchbar"
+        "compose sort"
+        "menu main";
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto auto 1fr;
+    color: #202124;
+    background-image: url("../../../../imgs/rainbow_bg.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    min-height: 100vh;
+}
+
+.mail-logo {
+    grid-area: logo;
+    padding-top: 0.4em;
+    padding-left: 1.5rem;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #202124;
+}

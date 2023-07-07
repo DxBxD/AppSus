@@ -8,16 +8,15 @@ import NoteList from "../apps/keep/cmps/NoteList.js"
 
 export default {
     template: `
-        <section class="keep-options-bar">
-            <AddNote @noteAdded="addNote"/>
+        <section class="keep-page">
+            <section class="keep-options-bar">
+                <AddNote @noteAdded="addNote"/>
+            </section>
+            <section class="note-list-container">
+                <NoteList v-if="notes" :notes="notes" @removeNote="removeNote()" @openNote="openNote"/>
+            </section>
+            <router-view/>
         </section>
-            <NoteList 
-                v-if="notes"
-                :notes="notes" 
-                @removeNote="removeNote()"
-                @openNote="openNote"/>
-        </section>
-        <router-view/>
     `,
     data() {
         return {

@@ -3,11 +3,11 @@ import { mailService } from "../../../services/mail.service.js"
 export default {
     template: `
         <div>
-            <button class="compose-button" @click="composeMail"><span class="material-icons">edit</span>Compose</button>
+            <button class="compose-button" @click="composeMail"><span class="material-icons-outlined">edit</span>Compose</button>
             <form class="compose-form" :class="{ 'is-visible': showForm }" @submit.prevent="sendMail"  novalidate>
                 <div class="compose-header">
                     New Message
-                    <button type="button" class="close-button" @click="closeForm"><span class="material-icons">close</span></button>
+                    <button type="button" class="close-button" @click="closeForm"><span class="material-icons-outlined">close</span></button>
                 </div>
                 <div class="field">
                     <label>To</label>

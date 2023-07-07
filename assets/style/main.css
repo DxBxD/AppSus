@@ -1,26 +1,38 @@
-/* Setup */
-@import 'setup/vars.css';
-@import 'setup/typography.css';
+/* General */
 
-/* Base */
-@import 'base/base.css';
-@import 'base/helpers.css';
-@import 'base/layout.css';
-@import 'base/forms.css';
+    /* Setup */
+    @import 'setup/vars.css';
+    @import 'setup/typography.css';
 
-/* Components */
-@import 'cmps/UserMsg.css';
-@import 'cmps/HomePage.css';
-@import 'cmps/AboutPage.css';
-@import 'cmps/AppHeader.css';
-@import 'cmps/app.css';
+    /* Base */
+    @import 'base/base.css';
+    @import 'base/helpers.css';
+    @import 'base/layout.css';
+    @import 'base/forms.css';
+
+    /* Components */
+    @import 'cmps/UserMsg.css';
+    @import 'cmps/HomePage.css';
+    @import 'cmps/AboutPage.css';
+    @import 'cmps/AppHeader.css';
+    @import 'cmps/app.css';
 
 
 /* Apps */
 
     /* Mail */
-    @import 'apps/mail/MailIndex.css';
-    @import 'apps/mail/MailLCompose.css';
+
+        /* Cmps */
+        @import 'apps/mail/cmps/MailIndex.css';
+        @import 'apps/mail/cmps/MailSearch.css';
+        @import 'apps/mail/cmps/MailCompose.css';
+        @import 'apps/mail/cmps/MailSort.css';
+        @import 'apps/mail/cmps/MailList.css';
+        @import 'apps/mail/cmps/MailPreview.css';
+        @import 'apps/mail/cmps/MailLDetails.css';
+        @import 'apps/mail/cmps/MailMenu.css';
 
     /* Keep */
-    @import 'apps/keep/NoteIndex.css';
+
+        /* Cmps */
+        @import 'apps/keep/NoteIndex.css';

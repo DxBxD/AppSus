@@ -1,0 +1,13 @@
+.mail-list {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    margin-left: 0.37rem;
+    margin-right: 1em;
+    padding: 0.05rem;
+    overflow-y: auto;
+    border-radius: 13px;
+    background-color: #ffffff58;
+    min-height: 20vh;
+}

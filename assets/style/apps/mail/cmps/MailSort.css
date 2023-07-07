@@ -1,0 +1,32 @@
+.mail-sort {
+    grid-area: sort;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.3rem;
+}
+
+.mail-sort button {
+    background-color: #ffffffe3;
+    border: none;
+    color: #3b3c3f;
+    font-size: 0.81em;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    box-shadow: rgba(0, 0, 0, 0.10) 1.55px 1.55px 2px;
+}
+
+.mail-sort button span {
+    color: #3b3c3f;
+    font-size: 1.65em;
+}
+
+.mail-sort button:hover {
+    background-color: #f6f6f6c2;
+}

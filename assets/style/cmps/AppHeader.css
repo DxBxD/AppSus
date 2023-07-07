@@ -5,6 +5,11 @@
   background-color: var(--clr5);
   color: var(--secondary-clr1);
   padding: 1em;
+  padding-top: 40px;
+}
+
+.app-header .app-logo {
+  margin-bottom: 29px;
 }
 
 .app-header nav {

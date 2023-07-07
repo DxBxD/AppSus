@@ -8,10 +8,10 @@ export default {
         <article class="note" :style="{ backgroundColor: note.info.backgroundColor || 'defaultColor' }"> 
             <p> {{ note.info.txt }} </p> 
             <section class="note-btns">
-                <button class="remove-note-btn" @click="removeNote"><span class="material-icons">delete</span></button>
-                <button class="edit-note-btn"><span class="material-icons">edit</span></button>
-                <input type="color" class="color-palette-input" @input="changeColor($event)"></button>
-                <button class="pin-note-btn"><span class="material-icons">push_pin</span></button>
+                <button class="remove-note-btn" @click="removeNote"><span class="material-icons-outlined">delete</span></button>
+                <button class="edit-note-btn"><span class="material-icons-outlined">edit</span></button>
+                <button class="color-palette-btn"><span class="material-icons-outlined color-input-container">palette<input type="color" class="color-palette-input" @input="changeColor($event)"></span></button>
+                <button class="pin-note-btn"><span class="material-icons-outlined">push_pin</span></button>
             </section>
         </article>
     <!-- </section> -->

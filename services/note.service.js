@@ -100,7 +100,7 @@ function _createNotes() {
     if (!notes || !notes.length) {
         const notes = [
             {
-                id: 'n101',
+                id: 'n100',
                 createdAt: 1112222,
                 type: 'NoteTxt',
                 isPinned: true,
@@ -109,24 +109,235 @@ function _createNotes() {
                 }
             },
             {
-                id: 'n102',
-                createdAt: 1112222,
-                type: 'NoteTxt',
-                isPinned: true,
-                info: {
-                    txt: 'Fullstack Me Baby!Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                "id": "n101",
+                "createdAt": 1630307463000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                    "txt": "Remember to call John",
+                    "backgroundColor": "#ffd166"
                 }
             },
             {
-                id: 'n103',
-                createdAt: 1112222,
-                type: 'NoteTxt',
-                isPinned: true,
-                info: {
-                    txt: 'Fullstack Me Baby!'
+                "id": "n102",
+                "createdAt": 1630307464000,
+                "type": "NoteTxt",
+                "isPinned": true,
+                "info": {
+                    "txt": "Buy milk and eggs",
+                    "backgroundColor": "#06d6a0"
                 }
             },
-
+            {
+                "id": "n103",
+                "createdAt": 1112222,
+                "type": "NoteTxt",
+                "isPinned": true,
+                "info": {
+                    "txt": "לקנות קילו עגבניות",
+                    "backgroundColor": "#c54444"
+                }
+            },
+            {
+                "id": "n104",
+                "createdAt": 1630307466000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                    "txt": "Finish the report",
+                    "backgroundColor": "#118ab2"
+                }
+            },
+            {
+                "id": "n105",
+                "createdAt": 1630307467000,
+                "type": "NoteTxt",
+                "isPinned": true,
+                "info": {
+                    "txt": "Book flight tickets",
+                    "backgroundColor": "#ffd166"
+                }
+            },
+            {
+                "id": "n106",
+                "createdAt": 1630307468000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                    "txt": "Pick up dry cleaning",
+                    "backgroundColor": "#06d6a0"
+                }
+            },
+            {
+                "id": "n107",
+                "createdAt": 1630307469000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                    "txt": "Send birthday gift",
+                    "backgroundColor": "#ef476f"
+                }
+            },
+            {
+                "id": "n108",
+                "createdAt": 1630307470000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                    "txt": "Schedule dentist appointment",
+                    "backgroundColor": "#ffd166"
+                }
+            },
+            {
+                "id": "n109",
+                "createdAt": 1630307471000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                    "txt": "Buy groceries",
+                    "backgroundColor": "#118ab2"
+                }
+            },
+            {
+                "id": "n110",
+                "createdAt": 1630307472000,
+                "type": "NoteTxt",
+                "isPinned": true,
+                "info": {
+                    "txt": "Call mom",
+                    "backgroundColor": "#ef476f"
+                }
+            },
+            {
+                "id": "n111",
+                "createdAt": 1630307473000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                    "txt": "Make dinner reservation",
+                    "backgroundColor": "#06d6a0"
+                }
+            },
+            {
+                "id": "n112",
+                "createdAt": 1630307474000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                    "txt": "Take the dog for a walk",
+                    "backgroundColor": "#ffd166"
+                }
+            },
+            {
+                "id": "n113",
+                "createdAt": 1630307475000,
+                "type": "NoteTxt",
+                "isPinned": true,
+                "info": {
+                    "txt": "Buy birthday present",
+                    "backgroundColor": "#118ab2"
+                }
+            },
+            {
+                "id": "n114",
+                "createdAt": 1630307476000,
+                "type": "NoteTxt",
+                "isPinned": true,
+                "info": {
+                    "txt": "Go to the gym",
+                    "backgroundColor": "#c54444"
+                }
+            },
+            {
+                "id": "n115",
+                "createdAt": 1630307477000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                    "txt": "Call the plumber",
+                    "backgroundColor": "#06d6a0"
+                }
+            },
+            {
+                "id": "n116",
+                "createdAt": 1630307478000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                    "txt": "Write a blog post",
+                    "backgroundColor": "#ef476f"
+                }
+            },
+            {
+                "id": "n117",
+                "createdAt": 1630307479000,
+                "type": "NoteTxt",
+                "isPinned": true,
+                "info": {
+                    "txt": "Buy new shoes",
+                    "backgroundColor": "#ffd166"
+                }
+            },
+            {
+                "id": "n118",
+                "createdAt": 1630307480000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                    "txt": "Water the plants",
+                    "backgroundColor": "#118ab2"
+                }
+            },
+            {
+                "id": "n119",
+                "createdAt": 1630307481000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                    "txt": "Finish the book",
+                    "backgroundColor": "#06d6a0"
+                }
+            },
+            {
+                "id": "n120",
+                "createdAt": 1630307482000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                    "txt": "Start a new project",
+                    "backgroundColor": "#ef476f"
+                }
+            },
+            {
+                "id": "n121",
+                "createdAt": 1630307483000,
+                "type": "NoteTxt",
+                "isPinned": true,
+                "info": {
+                  "txt": "Attend the meeting",
+                  "backgroundColor": "#ffd166"
+                }
+              },
+              {
+                "id": "n122",
+                "createdAt": 1630307484000,
+                "type": "NoteTxt",
+                "isPinned": false,
+                "info": {
+                  "txt": "Clean the house",
+                  "backgroundColor": "#06d6a0"
+                }
+              },
+              {
+                "id": "n123",
+                "createdAt": 1630307485000,
+                "type": "NoteTxt",
+                "isPinned": true,
+                "info": {
+                  "txt": "Take a break",
+                  "backgroundColor": "#c54444"
+                }
+              }
         ]
         utilService.saveToStorage(NOTES_KEY, notes)
     }

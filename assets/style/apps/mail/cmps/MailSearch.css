@@ -1,0 +1,24 @@
+.mail-search-bar {
+    grid-area: searchbar;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mail-search-bar input {
+    width: 50%;
+    padding: 15px;
+    border: none;
+    border-radius: 25px;
+    margin-top: 0.5em;
+    margin-bottom: 0.6em;
+    background-position: 10px 10px;
+    background-color: #cccccc62;
+    color: #202124;
+    padding-left: 40px;
+    font-size: 1em;
+}
+
+.mail-search-bar input::placeholder {
+    color: #202124;
+}

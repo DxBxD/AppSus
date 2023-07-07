@@ -1,0 +1,72 @@
+.mail-menu {
+    grid-area: menu;
+    display: flex;
+    flex-direction: column;
+    margin-left: 0em;
+    padding: 10px;
+    gap: 10px;
+    list-style-type: none;
+}
+
+.mail-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0em;
+    list-style-type: none;
+}
+
+.mail-menu li {
+    overflow: visible;
+    position: relative;
+    cursor: pointer;
+    color: #202124;
+    font-size: 1rem;
+    transition: .3s;
+    padding: 0.6em;
+    text-shadow: rgba(0, 0, 0, 0.10) 1.55px 1.55px 2px;
+    font-size: 0.89em;
+    background-color: transparent;
+}
+
+.mail-menu ul:hover li {
+    text-shadow: rgba(0, 0, 0, 0.418) 0.55px 0.55px 1px;
+    border-radius: 40px;
+    color: #202124;
+}
+
+.mail-menu li::before {
+    content: "";
+    position: absolute;
+    top: 0.15em;
+    bottom: 0.15em;
+    left: -100px;
+    right: 0;
+    background-color: inherit;
+    z-index: -1;
+    border-radius: 40px;
+    transition: background-color .2s ease;
+}
+
+.mail-menu li:hover::before {
+    background-color: #d1d1d177;
+}
+
+.mail-menu .material-icons-outlined {
+    color: #202124;
+    margin-right: 0.7em;
+    font-size: 1.25em;
+    text-shadow: rgba(0, 0, 0, 0.10) 1.55px 1.55px 2px;
+}
+
+.mail-menu li:hover .material-icons-outlined {
+    text-shadow: rgba(0, 0, 0, 0.275) 0.55px 0.55px 1px;
+    transition: .3 ease;
+    color: #202124;
+}
+
+.mail-menu li,
+.mail-menu .material-icons-outlined {
+    z-index: 10;
+    position: relative;
+}
+

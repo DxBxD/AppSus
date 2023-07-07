@@ -1,5 +1,5 @@
 import { mailService } from '../services/mail.service.js'
-import NavBar from '../apps/mail/cmps/NavBar.js'
+import MailSearch from '../apps/mail/cmps/MailSearch.js'
 import MailMenu from '../apps/mail/cmps/MailMenu.js'
 import MailSort from '../apps/mail/cmps/MailSort.js'
 import MailList from '../apps/mail/cmps/MailList.js'
@@ -10,14 +10,19 @@ export default {
         <section class="mail-page">
             <div class="mail-logo" @click="onFilter('inbox')"><RouterLink to="/mail">MisterEmail</RouterLink></div>
             <div class="mail-compose"><MailCompose @send="onSendMail"/></div>
-            <NavBar @search="onSearch"/>
+            <MailSearch @search="onSearch"/>
             <MailMenu @filter="onFilter"/>
             <MailSort @sort="onSort"/>
-            <RouterView :mails="mails" @opened="onMailOpened" @starred="onMailStarred"/>
+            <RouterView :mails="mails" 
+                        @opened="onMailOpened" 
+                        @starred="onMailStarred"
+                        @deleted="onMailDeleted"
+                        @toggleRead="onMailToggleRead"
+                        @toggleArchive="onMailToggleArchive"/>
         </section>
     `,
     components: {
-        NavBar,
+        MailSearch,
         MailCompose,
         MailMenu,
         MailSort,
@@ -57,6 +62,22 @@ export default {
         onMailOpened(openedMail) {
             console.log(openedMail.isRead)
             mailService.save(openedMail).then(this.fetchMails)
+        },
+        onMailDeleted(deletedMail) {
+            if (deletedMail.removedAt) {
+                mailService.remove(deletedMail.id).then(this.fetchMails)
+            } else {
+                deletedMail.removedAt = Date.now()
+                mailService.save(deletedMail).then(this.fetchMails)
+            }
+        },
+        onMailToggleRead(toggledMail) {
+            toggledMail.isRead = !toggledMail.isRead
+            mailService.save(toggledMail).then(this.fetchMails)
+        },
+        onMailToggleArchive(toggledMail) {
+            toggledMail.isArchived = !toggledMail.isArchived
+            mailService.save(toggledMail).then(this.fetchMails)
         },
         onSendMail(mail) {
             mailService.save(mail).then(this.fetchMails)

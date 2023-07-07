@@ -1,3 +1,41 @@
+.mail-compose {
+    grid-area: compose;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+.mail-compose button {
+    background-color: #ffffffe3;
+    border: none;
+    color: #3b3c3f;
+    font-size: 0.81em;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 500;
+    margin-left: 1em;
+    cursor: pointer;
+    border-radius: 17px;
+    transition: background-color 0.3s ease;
+    box-shadow: rgba(0, 0, 0, 0.10) 1.55px 1.55px 2px;
+}
+
+.mail-compose span {
+    margin-right: 0.6em;
+    color: #3b3c3f;
+    font-size: 1.65em;
+}
+
+.mail-compose button:hover {
+    background-color: #f6f6f6c2;
+}
+
 .compose-form {
     position: fixed;
     bottom: 10px;

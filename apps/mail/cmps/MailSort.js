@@ -3,12 +3,12 @@ export default {
             <section class="mail-sort">
                 <div>
                     <button @click="onSort('sentAt')">
-                        <span class="material-icons">event</span> Date 
-                        <span class="material-icons">{{ dateSortDown ? 'expand_more' : 'expand_less' }}</span>
+                        <span class="material-icons-outlined">event</span> Date 
+                        <span class="material-icons-outlined">{{ dateSortDown ? 'expand_more' : 'expand_less' }}</span>
                     </button>
                     <button @click="onSort('subject')">
-                        <span class="material-icons">subject</span> Subject 
-                        <span class="material-icons">{{ subjectSortDown ? 'expand_more' : 'expand_less' }}</span>
+                        <span class="material-icons-outlined">subject</span> Subject 
+                        <span class="material-icons-outlined">{{ subjectSortDown ? 'expand_more' : 'expand_less' }}</span>
                     </button>
                 </div>
             </section>
