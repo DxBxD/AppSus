@@ -39,7 +39,6 @@ function query() {
         //         (c1, c2) => c1.date.localeCompare(c2.date) * gSortBy.date
         //     )
         // }
-        console.log('notes:', notes)
         return notes
     })
 }
@@ -53,7 +52,7 @@ function _setNextPrevNoteId(note) {
     return storageService.query(NOTES_KEY)
         .then(notes => {
             const noteIdx = notes.findIndex(currNote => currNote.id === note.id)
-            note.nextNoteId = notes[noteIdx + 1] ? notes[notedIdx + 1].id : notes[0].id
+            note.nextNoteId = notes[noteIdx + 1] ? notes[noteIdx + 1].id : notes[0].id
             note.prevNoteId = notes[noteIdx - 1]
                 ? notes[noteIdx - 1].id
                 : notes[notes.length - 1].id
@@ -100,29 +99,32 @@ function _createNotes() {
     if (!notes || !notes.length) {
         const notes = [
             {
-                id: 'n101',
+                id: utilService.makeId(),
                 createdAt: 1112222,
                 type: 'NoteTxt',
                 isPinned: true,
                 info: {
+                    title: 'Sample Title',
                     txt: 'Fullstack Me Baby!'
                 }
             },
             {
-                id: 'n102',
+                id: utilService.makeId(),
                 createdAt: 1112222,
                 type: 'NoteTxt',
                 isPinned: true,
                 info: {
+                    title: 'Sample Title',
                     txt: 'Fullstack Me Baby!Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
                 }
             },
             {
-                id: 'n103',
+                id: utilService.makeId(),
                 createdAt: 1112222,
                 type: 'NoteTxt',
                 isPinned: true,
                 info: {
+                    title: 'Sample Title',
                     txt: 'Fullstack Me Baby!'
                 }
             },

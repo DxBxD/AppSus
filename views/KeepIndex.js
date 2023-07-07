@@ -2,9 +2,10 @@ import AddNote from '../apps/keep/cmps/AddNote.js'
 import { noteService } from "../services/note.service.js"
 import NoteList from "../apps/keep/cmps/NoteList.js"
 
-// TODO - check all of the hotfixes from Tal, make sure everything is working, worked on the layout...
-// TODO - deleted/modified some elements from noteList/Preview
-// TODO - Delete edit button, replace with a modal, with a backdrop.
+// TODO - GET HELP ON LAYOUT
+// TODO - replace with a modal, with a backdrop.
+// TODO - Add Pin feature, render by pin.
+
 
 export default {
     template: `
@@ -42,9 +43,7 @@ export default {
             this.fetchNotes()
         },
         openNote(id) {
-            console.log('id:', id)
-            // this.$router.push(`keep/n101`)
-
+            this.$router.push(`keep/${id}`)
         }
     },
     components: {

@@ -2,10 +2,10 @@
     background-color: #202124;
     overflow: hidden;
     height: 100vh;
-        column-count: 4;
-        column-fill: inherit;
-        width: fit-content;
-        margin-top: 40px;
+    column-count: 3;
+    column-fill: inherit;
+    width: fit-content;
+    margin-top: 40px;
 }
 
 ul {
@@ -16,6 +16,7 @@ ul {
 .note {
     position: relative;
     background-color: bisque;
+    opacity: 0.9;
     height: 12em;
     padding-top: 1em;
     margin-inline-start: 2em;
@@ -34,7 +35,7 @@ ul {
 
 .note:hover {
     border: 1px solid #000000;
-    background-color: rgb(252, 209, 157);
+    opacity: 1;
 }
 
 .note p {
@@ -67,17 +68,6 @@ ul {
     bottom: 10px;
 }
 
-.edit-note-btn {
-    position: absolute;
-    visibility: hidden;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    font-size: 2em;
-
-}
-
 .color-palette-input {
     position: absolute;
     visibility: hidden;
@@ -98,32 +88,25 @@ ul {
     font-size: 2em;
 }
 
-
 .note:hover .remove-note-btn {
     visibility: visible;
 }
 
-.note:hover .edit-note-btn {
+.note:hover .color-palette-input {
     visibility: visible;
     right: 1.2em;
     bottom: 10px;
 }
 
-.note:hover .color-palette-input {
+.note:hover .pin-note-btn {
     visibility: visible;
     right: 2.2em;
     bottom: 10px;
 }
 
-.note:hover .pin-note-btn {
-    visibility: visible;
-    right: 3.2em;
-    bottom: 10px;
-}
-
 .remove-note-btn:hover {
     color: #be2626;
-}   
+}
 
 .edit-note-btn:hover {
     color: #be2626;
@@ -136,3 +119,52 @@ ul {
 .pin-note-btn:hover {
     color: #be2626;
 }
+
+.note-details-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.note-details {
+    position: relative;
+    background: #FFFFFF;
+    box-shadow: 2px 2px 20px 1px;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 15em;
+    font-size: 18px;
+    margin-inline-start: 2em;
+    margin-inline-end: 2em;
+    margin-block-start: 1em;
+    padding: 2em;
+}
+
+.note-details p {
+    color: #000000;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    font-weight: 400;
+    padding-top: 0.2em;
+    font-size: 1.2em;
+}
+
+.note-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    padding-bottom: 0.5em;
+}
+
+.note-date{
+    position: absolute;
+    font-size: 1em;
+    font-weight: 400;
+    bottom: 0;
+    }
