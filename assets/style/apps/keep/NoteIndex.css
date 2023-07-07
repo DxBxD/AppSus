@@ -67,7 +67,7 @@
 
 .note:hover {
     border: 1px solid #000000;
-    background-color: rgb(252, 209, 157);
+    opacity: 1;
 }
 
 .note p {
@@ -149,7 +149,7 @@
     visibility: visible;
 }
 
-.note:hover .edit-note-btn {
+.note:hover .color-palette-input {
     visibility: visible;
     right: 1.2em;
     bottom: 10px;
@@ -161,7 +161,7 @@
     bottom: 10px;
 }
 
-.note:hover .pin-note-btn {
+.note:hover .duplicate-note-btn {
     visibility: visible;
     right: 3.2em;
     bottom: 10px;
