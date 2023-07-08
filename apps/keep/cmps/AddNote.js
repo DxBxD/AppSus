@@ -19,20 +19,34 @@ export default {
             note: noteService.getEmptyNote(),
         }
     },
-    methods: {
+    methods: { 
         addNote() {
             noteService.save(this.note)
                 .then(savedNote => {
                     console.log('Saved Note:', savedNote)
                     this.$emit('noteAdded')
-                    showSuccessMsg('Note added')         
+                    showSuccessMsg('Note added')
                 })
                 .catch(err => {
                     console.error('Error saving note:', err)
                 })
         },
         addImage() {
-            this.$refs.imageUpload.click() 
+            this.$refs.imageUpload.click()
+        },
+        uploadImage(e) {
+            const file = e.target.files[0]
+            const reader = new FileReader()
+
+            reader.onloadend = () => {
+                this.note.info.imgUrl = reader.result
+                this.note.type = 'noteImg'
+                this.addNote()
+            }
+
+            if (file) {
+                reader.readAsDataURL(file)
+            }
         },
         addVideo() {
             console.log('Adding video')

@@ -57,8 +57,8 @@ export default {
             mailService.createNoteDraft(title, txt)
                 .then(noteDraft => {
                     const mailId = noteDraft.id
-                    this.$router.push({ path: '/mail', query: { mailId } })
-                    showSuccessMsg('Note sent as mail')
+                    this.$router.push('/mail/' + mailId)
+                    showSuccessMsg('Note added to drafts')
                 })
         }
     },
