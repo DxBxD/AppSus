@@ -58,7 +58,8 @@
     word-break: break-all;
     overflow: hidden;
     cursor: pointer;
-    border: 1px solid transparent;
+    border: 3px solid transparent;
+    transition: 0.1s ease-in-out;
 }
 
 .note:not(:first-of-type) {
@@ -66,8 +67,8 @@
 }
 
 .note:hover {
-    border: 1px solid #000000;
-    opacity: 1;
+    border: 3px solid #ffffff;
+    border-radius: 10px;
 }
 
 .note p {
@@ -96,18 +97,8 @@
     cursor: pointer;
     outline: none;
     font-size: 2em;
-    right: 10px;
+    right: 0.2em;
     bottom: 10px;
-}
-
-.edit-note-btn {
-    position: absolute;
-    visibility: hidden;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    font-size: 2em;
 }
 
 .color-palette-btn {
@@ -127,8 +118,8 @@
 .color-palette-input {
     opacity: 0;
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     z-index: 10;
@@ -145,19 +136,29 @@
     font-size: 2em;
 }
 
-.note:hover .remove-note-btn {
-    visibility: visible;
+.duplicate-note-btn {
+    position: absolute;
+    visibility: hidden;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 2em;
 }
 
-.note:hover .color-palette-input {
+.note:hover .remove-note-btn {
     visibility: visible;
-    right: 1.2em;
-    bottom: 10px;
 }
 
 .note:hover .color-palette-btn {
     visibility: visible;
     right: 2.2em;
+    bottom: 10px;
+}
+
+.note:hover .pin-note-btn {
+    visibility: visible;
+    right: 1.2em;
     bottom: 10px;
 }
 
@@ -167,22 +168,127 @@
     bottom: 10px;
 }
 
-.note:hover .edit-color-btn {
-    visibility: visible;
-}
-
 .remove-note-btn:hover {
-    color: #be2626;
-}
-
-.edit-note-btn:hover {
-    color: #be2626;
+    color: white;
 }
 
 .color-palette-btn:hover {
-    color: #be2626;
+    color: white;
 }
 
 .pin-note-btn:hover {
-    color: #be2626;
+    color: white;
+}
+
+.duplicate-note-btn:hover {
+    color: white;
+}
+
+.note-details-container {
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(1px);
+}
+
+.note-details {
+    position: relative;
+    background: #FFFFFF;
+    overflow-x: auto;
+    border: 1px solid #0303038a;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 22em;
+    font-size: 18px;
+    margin-inline-start: 2em;
+    margin-inline-end: 2em;
+    margin-block-start: 1em;
+    padding: 2em;
+    border-radius: 10px;
+}
+
+.note-details .note-txt {
+    color: #000000;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    font-weight: 400;
+    padding-top: 0.1em;
+    font-size: 1.2em;
+}
+
+.note-details .note-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    padding-bottom: 0.3em;
+}
+
+.note-details .note-date {
+    position: absolute;
+    font-size: 1em;
+    font-weight: 400;
+    opacity: 0.5;
+    top: 3px;
+}
+
+.pinned-note {
+    cursor: pointer;
+    border: 1px solid transparent;
+    break-inside: avoid-column;
+    border: 1px solid #ffffff;
+}
+
+.pinned-note>span {
+    color: #999494;
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+}
+
+textarea.note-title,
+textarea.note-txt {
+    background-color: transparent;
+    border: none;
+    resize: none;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    outline: none;
+}
+
+button.save-btn {
+    position: absolute;
+    bottom: 0.5em;
+    background-color: #fbbc04;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    margin-top: 10px;
+    outline: none;
+    width: 50%;
+    left: 25%;
+}
+
+button.save-btn:hover {
+    background-color: #e0a403;
+}
+
+textarea.note-title:hover {
+    background-color: #f0f0f0;
+    cursor: text;
+}
+
+textarea.note-txt:hover {
+    background-color: #f0f0f0;
+    cursor: text;
 }

@@ -1,18 +1,20 @@
+
 import { noteService } from "../../../services/note.service.js"
 import AddNote from "../cmps/AddNote.js"
+
 
 export default {
     props: ['note'],
     template: `
         <article :class="['note', { 'pinned-note': note.isPinned }]" :style="{ backgroundColor: note.info.backgroundColor || 'defaultColor' }"> 
-        <span v-if="note.isPinned" class="pinned-note-icon" class="material-icons">push_pin</span>
+        <span v-if="note.isPinned" class="pinned-note-icon" class="material-icons-outlined">push_pin</span>
             <h4> {{ note.info.title }} </h4>
             <p> {{ note.info.txt }} </p> 
             <section class="note-btns">
-                <button class="remove-note-btn" @click="removeNote"><span class="material-icons-outlined">delete</span></button>
-                <button class="edit-note-btn"><span class="material-icons-outlined">edit</span></button>
-                <button class="color-palette-btn"><span class="material-icons-outlined color-input-container">palette<input type="color" class="color-palette-input" @input="changeColor($event)"></span></button>
-                <button class="pin-note-btn"><span class="material-icons-outlined">push_pin</span></button>
+                <button class="remove-note-btn" @click="removeNote" @click.stop><span class="material-icons-outlined">delete</span></button>
+                <button class="color-palette-btn"><span class="material-icons-outlined color-input-container">palette<input type="color" class="color-palette-input" @click.stop @input="changeColor($event)"></span></button>
+                <button class="pin-note-btn" @click.stop="togglePin"><span class="material-icons-outlined">{{ isPinned ? 'push_pin' : 'outlined_flag' }}</span></button>
+                <button class="duplicate-note-btn" @click="duplicateNote" @click.stop><span class="material-icons-outlined">content_copy</span></button>
             </section>
         </article>
     `,
@@ -42,8 +44,6 @@ export default {
             newNote.info.backgroundColor = noteBackgroundColor
             noteService.save(newNote)
         }
-
-
     },
     computed: {
         isPinned() {

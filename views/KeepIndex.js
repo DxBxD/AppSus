@@ -4,16 +4,14 @@ import NoteList from "../apps/keep/cmps/NoteList.js"
 import { eventBus } from "../services/event-bus.service.js"
 
 
-// TODO - GET HELP ON LAYOUT
-// TODO - add buttons to modal
+// TODO on colorpicker, value should be the note's color
 // TODO - add filters
 // TODO - add support for images/videos/lists
-// TODO - add title text to creating note
 // TODO - work on ui 
 // TODO - work on responsive design
+// TODO - add buttons to modal
 // TODO - work on mobile design
 // TODO - organize code
-
 
 export default {
     template: `
@@ -22,7 +20,11 @@ export default {
                 <AddNote @noteAdded="addNote"/>
             </section>
             <section class="note-list-container">
-                <NoteList v-if="notes" :notes="notes" @removeNote="removeNote()" @openNote="openNote"/>
+                <NoteList
+                    v-if="sortedNotes.length"
+                    :notes="sortedNotes" 
+                    @removeNote="removeNote()"
+                    @openNote="openNote"/>
             </section>
             <router-view/>
         </section>
@@ -33,14 +35,14 @@ export default {
         }
     },
     created() {
-        this.fetchNotes();
+        this.fetchNotes()
 
         // Listen for the 'update-notes' event and update notes when it's emitted
-        this.updateNotesListener = eventBus.on('update-notes', this.fetchNotes);
+        this.updateNotesListener = eventBus.on('update-notes', this.fetchNotes)
     },
     destroyed() {
         // Make sure to remove the event listener when the component is destroyed
-        this.updateNotesListener();
+        this.updateNotesListener()
     },
     methods: {
         fetchNotes() {

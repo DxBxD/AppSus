@@ -2,7 +2,6 @@ import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 import { eventBus } from './event-bus.service.js'
 
-
 const NOTES_KEY = 'notesDB'
 
 // TODO - update gFilterBy & gSortBy
@@ -48,7 +47,7 @@ function _setNextPrevNoteId(note) {
 }
 
 function save(note) {
-    console.log('note:',note)
+    console.log('note:', note)
     if (note.id) {
         return storageService.put(NOTES_KEY, note)
             .then(() => {
@@ -73,10 +72,8 @@ function remove(noteId) {
 }
 
 function getEmptyNote(id = '', type = '', info = {}, style = {}) {
-
     return { id, type, info, style }
 }
-
 
 function getFilterBy() {
     return { ...gFilterBy }
@@ -101,64 +98,269 @@ function _createNotes() {
     if (!notes || !notes.length) {
         const notes = [
             {
-                id: 'n100',
-                createdAt: 1112222,
-                type: 'NoteTxt',
-                isPinned: false,
-                info: {
-                    title: 'Sample Title',
-                    txt: 'Fullstack Me Baby!'
-                }
-            },
-            {
-                id: 'n102',
+                id: utilService.makeId(),
                 createdAt: 1112222,
                 type: 'NoteTxt',
                 isPinned: true,
                 info: {
-                    txt: 'Fullstack Me Baby!Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                    title: 'Sample Title',
+                    txt: 'Fullstack Me Baby!',
+                    backgroundColor: "#ef476f"
                 }
             },
             {
-                "id": "n120",
-                "createdAt": 1630307482000,
-                "type": "NoteTxt",
-                "isPinned": false,
-                "info": {
-                    "txt": "Start a new project",
-                    "backgroundColor": "#ef476f"
+                id: utilService.makeId(),
+                createdAt: 1630307463000,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Remember to call John",
+                    backgroundColor: "#ffd166"
                 }
             },
             {
-                "id": "n121",
-                "createdAt": 1630307483000,
-                "type": "NoteTxt",
-                "isPinned": true,
-                "info": {
-                  "txt": "Attend the meeting",
-                  "backgroundColor": "#ffd166"
+                id: utilService.makeId(),
+                createdAt: 1630307464000,
+                type: 'NoteTxt',
+                isPinned: true,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Buy milk and eggs",
+                    backgroundColor: "#06d6a0"
                 }
-              },
-              {
-                "id": "n122",
-                "createdAt": 1630307484000,
-                "type": "NoteTxt",
-                "isPinned": false,
-                "info": {
-                  "txt": "Clean the house",
-                  "backgroundColor": "#06d6a0"
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1112222,
+                type: 'NoteTxt',
+                isPinned: true,
+                info: {
+                    title: 'Sample Title',
+                    txt: "לקנות קילו עגבניות",
+                    backgroundColor: "#c54444"
                 }
-              },
-              {
-                "id": "n123",
-                "createdAt": 1630307485000,
-                "type": "NoteTxt",
-                "isPinned": true,
-                "info": {
-                  "txt": "Take a break",
-                  "backgroundColor": "#c54444"
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307466000,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Finish the report",
+                    backgroundColor: "#118ab2"
                 }
-              }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307467000,
+                type: 'NoteTxt',
+                isPinned: true,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Book flight tickets",
+                    backgroundColor: "#ffd166"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307468000,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Pick up dry cleaning",
+                    backgroundColor: "#06d6a0"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307469000,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Send birthday gift",
+                    backgroundColor: "#ef476f"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307470000,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Schedule dentist appointment",
+                    backgroundColor: "#ffd166"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307471000,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Buy groceries",
+                    backgroundColor: "#118ab2"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307472000,
+                type: 'NoteTxt',
+                isPinned: true,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Call mom",
+                    backgroundColor: "#ef476f"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307473000,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Make dinner reservation",
+                    backgroundColor: "#06d6a0"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307474000,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Take the dog for a walk",
+                    backgroundColor: "#ffd166"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307475000,
+                type: 'NoteTxt',
+                isPinned: true,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Buy birthday present",
+                    backgroundColor: "#118ab2"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307476000,
+                type: 'NoteTxt',
+                isPinned: true,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Go to the gym",
+                    backgroundColor: "#c54444"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307477000,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Call the plumber",
+                    backgroundColor: "#06d6a0"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307478000,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Write a blog post",
+                    backgroundColor: "#ef476f"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307479000,
+                type: 'NoteTxt',
+                isPinned: true,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Buy new shoes",
+                    backgroundColor: "#ffd166"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307480000,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Water the plants",
+                    backgroundColor: "#118ab2"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307481000,
+                type: "NoteTxt",
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Finish the book",
+                    backgroundColor: "#06d6a0"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307482000,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Start a new project",
+                    backgroundColor: "#ef476f"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307483000,
+                type: "NoteTxt",
+                isPinned: true,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Attend the meeting",
+                    backgroundColor: "#ffd166"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307484000,
+                type: 'NoteTxt',
+                isPinned: false,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Clean the house",
+                    backgroundColor: "#06d6a0"
+                }
+            },
+            {
+                id: utilService.makeId(),
+                createdAt: 1630307485000,
+                type: 'NoteTxt',
+                isPinned: true,
+                info: {
+                    title: 'Sample Title',
+                    txt: "Take a break",
+                    backgroundColor: "#c54444"
+                }
+            }
         ]
         utilService.saveToStorage(NOTES_KEY, notes)
     }
@@ -168,11 +370,9 @@ function _createNote(title = '', txt = '', backgroundColor = '#00d') {
     const note = getEmptyNote()
     note.id = utilService.makeId()
     note.info = { txt, title }
-    note.style = { backgroundColor: backgroundColor }
+    note.backgroundColor = { backgroundColor: backgroundColor }
     return save(note)
 }
-
-
 
 function updateIsPinned(noteId, isPinned) {
     return get(noteId)
