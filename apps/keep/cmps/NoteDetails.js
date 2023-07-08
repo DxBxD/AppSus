@@ -54,9 +54,12 @@ export default {
         sendNoteAsMail() {
             const title = this.note.info.title
             const txt = this.note.info.txt
-            createNoteDraft(title, txt)
-            this.$router.push('/mail')
-            showSuccessMsg('Note sent as mail')
+            mailService.createNoteDraft(title, txt)
+                .then(noteDraft => {
+                    const mailId = noteDraft.id
+                    this.$router.push({ path: '/mail', query: { mailId } })
+                    showSuccessMsg('Note sent as mail')
+                })
         }
     },
     created() {
