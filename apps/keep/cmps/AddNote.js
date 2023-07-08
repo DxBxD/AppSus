@@ -5,7 +5,11 @@ export default {
     template: `
             <section class="keep-menu">
                 <input v-model="note.info.txt" class="create-note-input" type="text" placeholder="What's on your mind?">
-                <button @click="addNote()" class="add-note-btn material-icons-outlined">add</button> 
+                <button @click="addNote()" class="add-note-btn material-icons-outlined">text_fields</button> 
+                <button @click="addImage()" class="add-note-btn material-icons-outlined">image</button>
+                <input type="file" ref="imageUpload" @change="uploadImage" style="display:none">
+                <button @click="addVideo()" class="add-note-btn material-icons-outlined">video_library</button>
+                <button @click="addList()" class="add-note-btn material-icons-outlined">format_list_numbered</button>
             </section>
             `,
     data() {
@@ -24,6 +28,15 @@ export default {
                     console.error('Error saving note:', err)
                 })
         },
+        addImage() {
+            this.$refs.imageUpload.click() 
+        },
+        addVideo() {
+            console.log('Adding video')
+        },
+        addList() {
+            console.log('Adding list')
+        }
     },
     components: {
         noteService
