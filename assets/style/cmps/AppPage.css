@@ -1,0 +1,42 @@
+body {
+    font-family: google-sans;
+}
+
+.home-page,
+.about-page {
+    padding: 70px;
+    text-align: center;
+}
+
+.about-page {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.home-page h1,
+.about-page h1 {
+    color: #333;
+    font-size: 30px;
+}
+
+.services {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 100px;
+}
+
+.service {
+    width: 40%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.service h2 {
+    color: #555;
+}
+
+.service p {
+    color: #777;
+}

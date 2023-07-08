@@ -26,13 +26,13 @@ export default {
             this.$emit('opened', openedMail)
         },
         onMailDeleted(deletedMail) {
-            this.$emit('deleted', deletedMail);
+            this.$emit('deleted', deletedMail)
         },
         onMailToggleRead(toggledMail) {
-            this.$emit('toggleRead', toggledMail);
+            this.$emit('toggleRead', toggledMail)
         },
         onMailToggleArchive(archivedMail) {
-            this.$emit('toggleArchive', archivedMail);
+            this.$emit('toggleArchive', archivedMail)
         },
         onOpenLabelModal(labeledMail) {
             this.$emit('openLabelModal', labeledMail)

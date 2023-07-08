@@ -150,7 +150,7 @@ function _createNotes() {
                 isPinned: false,
                 info: {
                     title: 'Leroy Jenkins',
-                    imgUrl: './assets/imgs/2.jpg',
+                    imgUrl: '../assets/imgs/2.jpg',
                     backgroundColor: "#118ab2"
                 }
             },
@@ -194,7 +194,7 @@ function _createNotes() {
                 isPinned: false,
                 info: {
                     title: 'Yes.',
-                    imgUrl: './assets/imgs/3.jpg',
+                    imgUrl: '../assets/imgs/3.jpg',
                     backgroundColor: "#ffd166"
                 }
             },
