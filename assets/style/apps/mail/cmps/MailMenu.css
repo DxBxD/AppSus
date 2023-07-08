@@ -2,8 +2,8 @@
     grid-area: menu;
     display: flex;
     flex-direction: column;
-    margin-left: 0em;
-    padding: 10px;
+    margin-left: -1.9em;
+    padding: 0.6em;
     gap: 10px;
     list-style-type: none;
 }
@@ -28,7 +28,7 @@
     background-color: transparent;
 }
 
-.mail-menu ul:hover li {
+.mail-menu ul li:hover {
     text-shadow: rgba(0, 0, 0, 0.418) 0.55px 0.55px 1px;
     border-radius: 40px;
     color: #202124;
@@ -51,6 +51,14 @@
     background-color: #d1d1d177;
 }
 
+.mail-menu li.curr-filter::before {
+    background-color: #d1d1d177;
+}
+
+.mail-menu li.curr-filter {
+    font-weight: 600;
+}
+
 .mail-menu .material-icons-outlined {
     color: #202124;
     margin-right: 0.7em;
@@ -70,3 +78,16 @@
     position: relative;
 }
 
+.mail-menu li.unread-exists {
+    position: relative;
+    font-weight: 600;
+}
+
+.mail-menu .unread-count {
+    font-weight: 600;
+    position: absolute;
+    right: 1.3em;
+    top: 28%;
+    text-shadow: rgba(0, 0, 0, 0.275) 0.55px 0.55px 1px;
+    font-size: 0.8em;
+}

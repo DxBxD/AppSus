@@ -11,7 +11,7 @@ export default {
             <span class="date">{{ formattedDate }}</span>
             <div class="mail-preview-hover-menu" v-if="showMenu" @click.stop>
                 <div class="hover-effect"><span class="material-icons-outlined" @click="onToggleArchive">{{ mail.isArchived ? 'unarchive' : 'archive' }}</span></div>
-                <div class="hover-effect"><span class="material-icons-outlined" @click="onDelete">delete</span></div>
+                <div class="hover-effect"><span class="material-icons-outlined" :class="{ 'delete-permanent': mail.removedAt }" @click="onDelete">delete</span></div>
                 <div class="hover-effect"><span class="material-icons-outlined" @click="onToggleRead">{{mail.isRead ? 'drafts' : 'email'}}</span></div>
             </div>
         </div>

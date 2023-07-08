@@ -6,35 +6,88 @@
     margin-left: 0.4rem;
     margin-right: 1em;
     padding: 1.5rem;
+    padding-left: 2.5rem;
     overflow-y: auto;
     background-color: #ffffff9f;
     border-radius: 13px;
     font-family: roboto;
 }
 
+.subject-date-container {
+    display: flex;
+    justify-content: space-between;
+    width: 72.5%;
+    align-items: center;
+}
+
 .mail-subject {
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 1.3em;
+    font-weight: 300;
     color: #202124;
-    margin-bottom: 1em;
+    margin-top: 0.75em;
+    margin-bottom: 1.5em;
+    flex-grow: 1;
+    cursor: default;
+}
+
+.mail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mail-icons {
+    display: flex;
+    gap: auto;
+}
+
+.mail-icons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #5f6368;
+}
+
+.mail-icons span {
+    font-size: 1.2em;
+    margin-bottom: 1.05em;
+}
+
+.mail-icons span:hover {
+    color: #202124;
+}
+
+.mail-icons span.delete-permanent {
+    color: rgb(254, 41, 41);
 }
 
 .mail-meta {
     font-size: 14px;
     color: #5f6368;
-    margin-bottom: 2em;
+    margin-bottom: 3em;
     display: flex;
     flex-direction: column;
 }
 
 .mail-from,
-.mail-to,
-.mail-date {
+.mail-to {
     margin-bottom: 5px;
+    font-weight: 300;
+    cursor: default;
+}
+
+.mail-date {
+    font-size: 0.75em;
+    color: #5f6368;
+    margin-bottom: 1.39em;
+    font-weight: 300;
+    cursor: default;
 }
 
 .mail-body {
-    font-size: 1em;
+    font-size: 0.9em;
+    font-weight: 300;
     line-height: 1.5;
     color: #202124;
+    padding-right: 30%;
 }

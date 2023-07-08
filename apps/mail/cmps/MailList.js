@@ -33,11 +33,5 @@ export default {
         onMailToggleArchive(archivedMail) {
             this.$emit('toggleArchive', archivedMail);
         },
-    },
-    watch: {
-        '$route': {
-            handler: 'fetchMails',
-            immediate: true
-        }
     }
 }

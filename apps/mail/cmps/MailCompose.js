@@ -1,3 +1,4 @@
+import { showUserMsg } from '../../../services/event-bus.service.js'
 import { mailService } from "../../../services/mail.service.js"
 
 export default {
@@ -72,14 +73,12 @@ export default {
         closeForm() {
             mailService.save(this.mail)
                 .then(savedMail => {
-                    console.log(savedMail, 'was saved as a draft')
                     this.mail = {}
                     this.showForm = false
                     this.$router.push({ query: {} })
                 })
         },
         sendMail() {
-            console.log('mail sent')
             this.mail.status = 'sent'
             this.mail.sentAt = Date.now()
             mailService.save(this.mail)

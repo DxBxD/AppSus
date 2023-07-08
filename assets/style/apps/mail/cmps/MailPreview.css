@@ -172,3 +172,7 @@
     position: relative;
     z-index: 1;
 }
+
+.mail-preview-hover-menu span.delete-permanent {
+    color: rgb(254, 41, 41);
+}

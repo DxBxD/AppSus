@@ -18,7 +18,9 @@ export const mailService = {
     getFilterBy,
     setFilterBy,
     setSortBy,
-    createDraft
+    createDraft,
+    getUnreadCounts,
+    getCurrFilter
 }
 
 window.mailService = mailService
@@ -114,6 +116,25 @@ function setSortBy({ type, order }) {
 }
 
 
+function getUnreadCounts() {
+    return storageService.query(MAIL_KEY)
+        .then(mails => {
+            const unreadCounts = {
+                inbox: mails.filter(mail => mail.to === loggedinUser.email && !mail.isRead && mail.isArchived === false && mail.removedAt === null).length,
+                starred: mails.filter(mail => mail.isStarred === true && !mail.isRead && mail.isArchived === false && mail.removedAt === null).length,
+                sent: mails.filter(mail => mail.from === loggedinUser.email && !mail.isRead && mail.isArchived === false && mail.removedAt === null && mail.status !== 'draft').length,
+                draft: mails.filter(mail => mail.status === 'draft' && !mail.isRead && mail.from === loggedinUser.email && mail.isArchived === false && mail.removedAt === null).length
+            }
+            return unreadCounts
+        })
+}
+
+
+function getCurrFilter() {
+    return gFilterBy.status
+}
+
+
 function createDraft() {
     const draft = {
         id: utilService.makeId(),
@@ -138,32 +159,6 @@ function _createMails() {
         mails = [
             {
                 id: utilService.makeId(),
-                subject: 'Hello!',
-                body: 'Hello world!',
-                isRead: true,
-                isStarred: false,
-                isArchived: false,
-                sentAt: 1688475453161,
-                status: 'sent',
-                removedAt: null,
-                from: 'test@test.com',
-                to: 'mahatma@appsus.com'
-            },
-            {
-                id: utilService.makeId(),
-                subject: 'Trashed Email',
-                body: 'This is a trashed email.',
-                isRead: false,
-                isStarred: false,
-                isArchived: false,
-                sentAt: 1628575453161,
-                status: 'sent',
-                removedAt: 1628575453161,
-                from: 'test@test.com',
-                to: 'mahatma@appsus.com'
-            },
-            {
-                id: utilService.makeId(),
                 subject: 'Lunch Invitation',
                 body: 'Dear Mahatma, I would like to invite you to a lunch meeting tomorrow. Please let me know if you are available. Best regards, John',
                 isRead: false,
@@ -182,7 +177,7 @@ function _createMails() {
                 isRead: false,
                 isStarred: true,
                 isArchived: false,
-                sentAt: utilService.generateRandomTimestamp(),
+                sentAt: 1688475453161,
                 status: 'sent',
                 removedAt: null,
                 from: 'marketing@example.com',
