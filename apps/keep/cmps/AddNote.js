@@ -42,6 +42,7 @@ export default {
                 this.note.info.imgUrl = reader.result
                 this.note.type = 'noteImg'
                 this.addNote()
+                showSuccessMsg('Image added')
             }
 
             if (file) {
@@ -49,10 +50,12 @@ export default {
             }
         },
         addVideo() {
-            console.log('Adding video')
+            this.note.type = 'noteVideo'
+            this.note.info.videoUrl = prompt('Enter video URL')
+            this.addNote()
         },
         addList() {
-            console.log('Adding list')
+            console.log('Imagine that you added a list')
         }
     },
     components: {

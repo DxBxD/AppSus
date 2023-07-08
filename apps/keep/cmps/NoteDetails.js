@@ -8,6 +8,7 @@ export default {
         <section class="note-details" v-if="note" :style="{ backgroundColor: note.info.backgroundColor || 'bisque' }">
             <textarea class="note-title" v-model="note.info.title" :style="{ backgroundColor: note.info.backgroundColor || 'bisque' }">{{ note.info.title }}</textarea>
             <img v-if="note.info.imgUrl" :src="note.info.imgUrl" class="note-img" />
+            <iframe v-if="note.info.videoUrl" :src="note.info.videoUrl" class="note-video"></iframe>
             <textarea class="note-txt" v-model="note.info.txt" :style="{ backgroundColor: note.info.backgroundColor || 'bisque' }">{{ note.info.txt }}</textarea>
             <h4 class="note-date" >Created at: {{ date }}</h4>
             <button class="save-btn" @click="saveNote">Save</button>

@@ -11,6 +11,7 @@ export default {
         <span v-if="note.isPinned" class="pinned-note-icon" class="material-icons-outlined">push_pin</span>
             <h4> {{ note.info.title }} </h4>
             <img v-if="note.info.imgUrl" :src="note.info.imgUrl" class="note-img" />
+            <iframe v-if="note.info.videoUrl" :src="note.info.videoUrl" class="note-video"></iframe>
             <p> {{ note.info.txt }} </p> 
             <section class="note-btns">
                 <button class="remove-note-btn" @click="removeNote" @click.stop><span class="material-icons-outlined">delete</span></button>
