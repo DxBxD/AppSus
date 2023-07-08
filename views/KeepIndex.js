@@ -6,7 +6,7 @@ import { eventBus } from "../services/event-bus.service.js"
 
 // TODO on colorpicker, value should be the note's color
 // TODO - add filters
-// TODO - add support for images/videos/lists
+// TODO - add support for videos/lists
 // TODO - work on ui 
 // TODO - work on responsive design
 // TODO - add buttons to modal

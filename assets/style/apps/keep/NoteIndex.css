@@ -53,9 +53,8 @@
     padding: 2em;
     box-shadow: -1px 0px 6px 0px rgba(0, 0, 0, 0.295);
     width: auto;
-    height: 12em;
+    height: 13em;
     border-radius: 5px;
-    word-break: break-all;
     overflow: hidden;
     cursor: pointer;
     border: 3px solid transparent;
@@ -268,7 +267,7 @@ textarea.note-txt {
 }
 
 textarea.note-title {
-    height: 80px
+    height: 150px;
 }
 
 textarea.note-txt {
@@ -318,4 +317,31 @@ textarea.note-title:hover {
 textarea.note-txt:hover {
     background-color: #f0f0f0;
     cursor: text;
+}
+
+textarea.note-title::-webkit-scrollbar {
+    display: none;
+}
+
+.note-img {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+    left: 50%;
+    top: 10%;
+    transform: translate(-41%, 0%);
+}
+
+.note-details>.note-img {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    max-width: 70%;
+    left: 50%;
+    top: 10%;
+    transform: translate(-41%, 0%);
 }

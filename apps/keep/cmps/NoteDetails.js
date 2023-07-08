@@ -7,6 +7,7 @@ export default {
     <div class="note-details-container" @click="closeModal">
         <section class="note-details" v-if="note" :style="{ backgroundColor: note.info.backgroundColor || 'bisque' }">
             <textarea class="note-title" v-model="note.info.title" :style="{ backgroundColor: note.info.backgroundColor || 'bisque' }">{{ note.info.title }}</textarea>
+            <img v-if="note.info.imgUrl" :src="note.info.imgUrl" class="note-img" />
             <textarea class="note-txt" v-model="note.info.txt" :style="{ backgroundColor: note.info.backgroundColor || 'bisque' }">{{ note.info.txt }}</textarea>
             <h4 class="note-date" >Created at: {{ date }}</h4>
             <button class="save-btn" @click="saveNote">Save</button>
