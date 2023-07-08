@@ -20,7 +20,8 @@ export const mailService = {
     setSortBy,
     createDraft,
     getUnreadCounts,
-    getCurrFilter
+    getCurrFilter,
+    createNoteDraft
 }
 
 window.mailService = mailService
@@ -150,6 +151,24 @@ function createDraft() {
         to: ''
     }
     return storageService.postWithId(MAIL_KEY, draft)
+}
+
+
+function createNoteDraft(title, txt) {
+    const noteDraft = {
+        id: utilService.makeId(),
+        subject: title,
+        body: txt,
+        isRead: false,
+        isStarred: false,
+        isArchived: false,
+        sentAt: Date.now(),
+        status: 'draft',
+        removedAt: null,
+        from: loggedinUser.email,
+        to: ''
+    }
+    return storageService.postWithId(MAIL_KEY, noteDraft)
 }
 
 

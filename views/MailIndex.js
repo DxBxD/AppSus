@@ -34,7 +34,8 @@ export default {
         return {
             mails: [],
             unreadCounts: {},
-            currFilter: 'inbox'
+            currFilter: 'inbox',
+            showComposeForm: false
         }
     },
     created() {
@@ -96,8 +97,8 @@ export default {
             mailService.save(toggledMail).then(this.fetchMails)
             this.$router.push('/mail')
         },
-        onSaveAsNote(mailNote) {
-
+        onMailSavedAsNote(notedMail) {
+            noteService.saveMailAsNote(notedMail.subject, notedMail.body)
         },
         onSendMail(mail) {
             mailService.save(mail).then(() => {

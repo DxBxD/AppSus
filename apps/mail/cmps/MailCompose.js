@@ -1,4 +1,4 @@
-import { showUserMsg } from '../../../services/event-bus.service.js'
+import { showSuccessMsg, showUserMsg } from '../../../services/event-bus.service.js'
 import { mailService } from "../../../services/mail.service.js"
 
 export default {
@@ -42,9 +42,11 @@ export default {
                 this.closeForm()
                 return
             }
-            const mailId = this.$route.params.mailId
+            const queryMailId = this.$route.query.mailId
+            const paramsMailId = this.$route.params.mailId
+            let mailId = paramsMailId || queryMailId
             if (mailId) {
-               mailService.get(mailId)
+                mailService.get(mailId)
                     .then(mail => {
                         if (mail.status === 'draft') {
                             this.mail = mail
@@ -76,6 +78,7 @@ export default {
                     this.mail = {}
                     this.showForm = false
                     this.$router.push({ query: {} })
+                    showSuccessMsg('Mail saved as draft')
                 })
         },
         sendMail() {
@@ -85,7 +88,35 @@ export default {
                 .then(() => {
                     this.mail = {}
                     this.showForm = false
+                    showSuccessMsg('Mail sent')
                 })
+        }
+    },
+    watch: {
+        '$route.query.mailId': {
+            immediate: true,
+            handler: function (newMailId, oldMailId) {
+                if (!newMailId) {
+                    this.closeForm()
+                } else if (newMailId !== oldMailId) {
+                    this.composeMail()
+                }
+            }
+        },
+        '$route.params.mailId': {
+            immediate: true,
+            handler: function (newMailId, oldMailId) {
+                if (!newMailId) {
+                    this.closeForm()
+                } else if (newMailId !== oldMailId) {
+                    mailService.get(newMailId)
+                    .then(mail => {
+                        if (mail.status === 'draft') {
+                            this.composeMail()
+                        }
+                    })
+                }
+            }
         }
     }
 }
