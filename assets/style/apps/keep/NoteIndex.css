@@ -251,6 +251,10 @@
     right: 0.5em;
 }
 
+.pinned-note:hover>span {
+    color: bisque;
+}
+
 textarea.note-title,
 textarea.note-txt {
     background-color: transparent;
