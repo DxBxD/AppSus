@@ -12,11 +12,11 @@ export default {
                 <div class="mail-date">{{ dateLabel }} {{ formattedDate }}</div>
             </div>
             <div class="mail-icons">
-                <button @click="onLabelMail"><span class="material-icons-outlined">label</span></button>
-                <button @click="onMailToggleArchive"><span class="material-icons-outlined">{{ mail.isArchived ? 'unarchive' : 'archive' }}</span></button>
-                <button @click="onMailDeleted"><span class="material-icons-outlined" :class="{ 'delete-permanent': mail.removedAt }">delete</span></button>
-                <button @click="onMailStarred"><span class="material-icons-outlined">{{ this.mail.isStarred ? 'star' : 'star_border' }}</span></button>
-                <button @click="onSaveAsNote"><span class="material-icons-outlined">note_add</span></button>
+                <button @click="onAddLabel"><span class="material-icons-outlined">label</span></button>
+                <button @click="onMailToggleArchive"><span class="material-icons-outlined" :title="archiveTitle">{{ mail.isArchived ? 'unarchive' : 'archive' }}</span></button>
+                <button @click="onMailDeleted"><span class="material-icons-outlined" :class="{ 'delete-permanent': mail.removedAt }" :title="removeTitle">{{ mail.removedAt ? 'delete_forever' : 'delete' }}</span></button>
+                <button @click="onMailStarred"><span class="material-icons-outlined" :title="starTitle">{{ this.mail.isStarred ? 'star' : 'star_border' }}</span></button>
+                <button @click="onSaveAsNote"><span class="material-icons-outlined" title="Save as note">note_add</span></button>
             </div>
             </div>
             <div class="mail-meta">
@@ -33,10 +33,18 @@ export default {
             formattedDate: null
         }
     },
-    methods: {
-        onMailLabeled() {
-            // Todfo: Implement label functionality
+    computed: {
+        starTitle() {
+            return this.mail.isStarred ? 'Unstar' : 'Star'
         },
+        archiveTitle() {
+            return this.mail.isArchived ? 'Unarchive' : 'Archive'
+        },
+        removeTitle() {
+            return this.mail.removedAt ? 'Delete Forever' : 'Move to Trash'
+        }
+    },
+    methods: {
         onMailDeleted() {
             this.$emit('deleted', this.mail)
             showSuccessMsg('Mail deleted')
@@ -52,6 +60,9 @@ export default {
         onSaveAsNote() {
             this.$emit('saveAsNote', this.mail)
             showSuccessMsg('Mail saved as note')
+        },
+        onAddLabel() {
+            this.$emit('openLabelModal', this.mail)
         },
         formatDate(timestamp) {
             const date = new Date(timestamp)
@@ -89,6 +100,11 @@ export default {
     watch: {
         '$route.params.mailId'() {
             if (this.$route.params.mailId) {
+                this.loadMail()
+            }
+        },
+        '$route.query.closed'() {
+            if (this.$route.query.closed) {
                 this.loadMail()
             }
         }

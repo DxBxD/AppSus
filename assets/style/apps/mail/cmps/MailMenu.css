@@ -72,8 +72,42 @@
     color: #202124;
 }
 
+.mail-menu .material-icons {
+    vertical-align: middle;
+    margin-right: 0.7em;
+    margin-bottom: 0.05em;
+    font-size: 1.25em;
+    text-shadow: rgba(0, 0, 0, 0.10) 1.55px 1.55px 2px;
+}
+
+.mail-menu .material-icons.work-label{
+    color: #1a73e8;
+}
+
+.mail-menu .material-icons.personal-label{
+    color: #62e81a;
+}
+
+.mail-menu .material-icons.friends-label{
+    color: #00897b;
+}
+
+.mail-menu .material-icons.important-label{
+    color: #db7b2b;
+}
+
+.mail-menu .material-icons.spam-label{
+    color: #db312b;
+}
+
+.mail-menu li:hover .material-icons {
+    text-shadow: rgba(0, 0, 0, 0.275) 0.55px 0.55px 1px;
+    transition: .3 ease;
+}
+
 .mail-menu li,
-.mail-menu .material-icons-outlined {
+.mail-menu .material-icons-outlined,
+.mail-menu .material-icons {
     z-index: 10;
     position: relative;
 }

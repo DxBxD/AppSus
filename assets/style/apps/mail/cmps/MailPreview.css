@@ -173,6 +173,6 @@
     z-index: 1;
 }
 
-.mail-preview-hover-menu span.delete-permanent {
+.mail-preview-hover-menu span.delete-permanent:hover {
     color: rgb(254, 41, 41);
 }

@@ -5,6 +5,7 @@ import MailMenu from '../apps/mail/cmps/MailMenu.js'
 import MailSort from '../apps/mail/cmps/MailSort.js'
 import MailList from '../apps/mail/cmps/MailList.js'
 import MailCompose from '../apps/mail/cmps/MailCompose.js'
+import MailLabelModal from '../apps/mail/cmps/MailLabelModal.js'
 
 export default {
     template: `
@@ -20,7 +21,9 @@ export default {
                         @deleted="onMailDeleted"
                         @toggleRead="onMailToggleRead"
                         @toggleArchive="onMailToggleArchive"
+                        @openLabelModal="onOpenLabelModal"
                         @saveAsNote="onMailSavedAsNote"/>
+            <MailLabelModal v-if="labelModalShown" :mail="currMail" @selected-labels="onSelectedLabels" @close="onCloseLabelModal" />
         </section>
     `,
     components: {
@@ -29,13 +32,17 @@ export default {
         MailMenu,
         MailSort,
         MailList,
+        MailLabelModal
     },
     data() {
         return {
             mails: [],
             unreadCounts: {},
             currFilter: 'inbox',
-            showComposeForm: false
+            showComposeForm: false,
+            labelModalShown: false,
+            currMail: null,
+            selectedLabels: []
         }
     },
     created() {
@@ -66,12 +73,13 @@ export default {
             this.fetchMails()
         },
         fetchMails() {
+            this.$router.push({ query: {} })
             mailService.query()
                 .then(mails => {
                     this.mails = mails
                 })
                 .then(this.fetchUnreadCounts)
-                    .then(this.fetchCurrFilter)
+                .then(this.fetchCurrFilter)
         },
         onMailStarred(starredMail) {
             mailService.save(starredMail).then(this.fetchMails)
@@ -107,11 +115,30 @@ export default {
                 this.$router.push('/mail')
             })
         },
+        onOpenLabelModal(mail) {
+            this.currMail = mail
+            this.labelModalShown = true
+        },
+        onCloseLabelModal() {
+            this.labelModalShown = false
+            this.currMail = null
+        },
+        onSelectedLabels(labels) {
+            this.selectedLabels = labels
+            if (this.currMail) {
+                const updatedMail = { ...this.currMail, labels: [...labels] }
+                mailService.save(updatedMail).then(() => {
+                    this.fetchMails()
+                    this.fetchUnreadCounts()
+                    console.log(updatedMail)
+                })
+            }
+        },
     },
     watch: {
         '$route': {
             handler: 'fetchMails',
             immediate: true
-        }
+        },
     }
 }

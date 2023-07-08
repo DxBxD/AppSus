@@ -42,6 +42,7 @@ export default {
                 this.closeForm()
                 return
             }
+            this.$router.push({ query: {closed: false} })
             const queryMailId = this.$route.query.mailId
             const paramsMailId = this.$route.params.mailId
             let mailId = paramsMailId || queryMailId
@@ -77,8 +78,7 @@ export default {
                 .then(savedMail => {
                     this.mail = {}
                     this.showForm = false
-                    this.$router.push({ query: {} })
-                    showSuccessMsg('Mail saved as draft')
+                    this.$router.push({ query: {closed: true} })
                 })
         },
         sendMail() {
@@ -89,6 +89,7 @@ export default {
                     this.mail = {}
                     this.showForm = false
                     showSuccessMsg('Mail sent')
+                    this.$router.push('/mail')
                 })
         }
     },

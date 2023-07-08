@@ -54,6 +54,21 @@ function query() {
                     case 'draft':
                         mails = mails.filter(mail => mail.status === 'draft' && mail.from === loggedinUser.email && mail.isArchived === false && mail.removedAt === null)
                         break
+                    case 'label-work':
+                        mails = mails.filter(mail => mail.labels && mail.labels.some(label => label.toLowerCase() === 'work') && mail.isArchived === false && mail.removedAt === null)
+                        break
+                    case 'label-personal':
+                        mails = mails.filter(mail => mail.labels && mail.labels.some(label => label.toLowerCase() === 'personal') && mail.isArchived === false && mail.removedAt === null)
+                        break
+                    case 'label-friends':
+                        mails = mails.filter(mail => mail.labels && mail.labels.some(label => label.toLowerCase() === 'friends') && mail.isArchived === false && mail.removedAt === null)
+                        break 
+                    case 'label-important':
+                        mails = mails.filter(mail => mail.labels && mail.labels.some(label => label.toLowerCase() === 'important') && mail.isArchived === false && mail.removedAt === null)
+                        break
+                    case 'label-spam':
+                        mails = mails.filter(mail => mail.labels && mail.labels.some(label => label.toLowerCase() === 'spam') && mail.isArchived === false && mail.removedAt === null)
+                        break         
                 }
             }
             mails.sort((a, b) => {
@@ -148,7 +163,8 @@ function createDraft() {
         status: 'draft',
         removedAt: null,
         from: loggedinUser.email,
-        to: ''
+        to: '',
+        labels: []
     }
     return storageService.postWithId(MAIL_KEY, draft)
 }
@@ -166,7 +182,8 @@ function createNoteDraft(title, txt) {
         status: 'draft',
         removedAt: null,
         from: loggedinUser.email,
-        to: ''
+        to: '',
+        labels: []
     }
     return storageService.postWithId(MAIL_KEY, noteDraft)
 }
@@ -188,6 +205,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'john@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Personal', 'Friends']
             },
             {
                 id: utilService.makeId(),
@@ -201,6 +219,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'marketing@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Important', 'Work']
             },
             {
                 id: utilService.makeId(),
@@ -214,6 +233,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'sarah@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Important', 'Work']
             },
             {
                 id: utilService.makeId(),
@@ -227,6 +247,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'hr@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Important', 'Work']
             },
             {
                 id: utilService.makeId(),
@@ -240,6 +261,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'travel@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Spam']
             },
             {
                 id: utilService.makeId(),
@@ -253,6 +275,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'product@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Spam']
             },
             {
                 id: utilService.makeId(),
@@ -266,6 +289,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'finance@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Spam']
             },
             {
                 id: utilService.makeId(),
@@ -279,6 +303,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'john@example.com',
+                labels: ['Friends']
               },
               {
                 id: utilService.makeId(),
@@ -292,6 +317,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'sarah@example.com',
+                labels: ['Work']
               },
               {
                 id: utilService.makeId(),
@@ -305,6 +331,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'alex@example.com',
+                labels: ['Work']
               },
               {
                 id: utilService.makeId(),
@@ -318,6 +345,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'jessica@example.com',
+                labels: ['Work']
               },
               {
                 id: utilService.makeId(),
@@ -331,6 +359,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'michael@example.com',
+                labels: ['Work']
               },
               {
                 id: utilService.makeId(),
@@ -344,6 +373,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'emily@example.com',
+                labels: ['Friends', 'Personal']
               },
               {
                 id: utilService.makeId(),
@@ -357,6 +387,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'mark@example.com',
+                labels: ['Work', 'Friends']
               },
               {
                 id: utilService.makeId(),
@@ -370,6 +401,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'emma@example.com',
+                labels: ['Work', 'Friends']
               },
               {
                 id: utilService.makeId(),
@@ -383,6 +415,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'robert@example.com',
+                labels: ['Work', 'Friends']
               },
               {
                 id: utilService.makeId(),
@@ -396,6 +429,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'jennifer@example.com',
+                labels: ['Work', 'Friends', 'Important']
               },
               {
                 id: utilService.makeId(),
@@ -409,6 +443,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'manager@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Important', 'Work']
               },
               {
                 id: utilService.makeId(),
@@ -422,6 +457,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'team@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
               },
               {
                 id: utilService.makeId(),
@@ -435,6 +471,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'friends@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Personal', 'Friends']
               },
               {
                 id: utilService.makeId(),
@@ -448,6 +485,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'hr@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Important', 'Work']
               },
               {
                 id: utilService.makeId(),
@@ -461,6 +499,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'compliance@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Important', 'Work']
               },
               {
                 id: utilService.makeId(),
@@ -474,6 +513,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'newsletter@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Spam']
               },
               {
                 id: utilService.makeId(),
@@ -487,6 +527,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'recruitment@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Important', 'Work']
               },
               {
                 id: utilService.makeId(),
@@ -500,6 +541,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'store@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Spam']
               },
               {
                 id: utilService.makeId(),
@@ -513,6 +555,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'development@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Spam']
               },
               {
                 id: utilService.makeId(),
@@ -526,6 +569,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'finance@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Spam']
               },
               {
                 id: utilService.makeId(),
@@ -539,6 +583,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'catlover@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Friends']
               },
               {
                 id: utilService.makeId(),
@@ -552,6 +597,119 @@ function _createMails() {
                 removedAt: null,
                 from: 'marketing@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Spam']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Discount Coupon',
+                body: 'Dear Mahatma, We have a special offer for you! Use the coupon code "SAVEMONEY" to get a 50% discount on your next purchase.',
+                isRead: true,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'marketing@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Spam']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Win a Free Vacation',
+                body: 'Congratulations! You have been selected as a lucky winner of our grand prize. Click here to claim your free vacation package.',
+                isRead: false,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'lottery@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Spam']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Unbelievable Investment Opportunity',
+                body: 'Hello, I have a once-in-a-lifetime investment opportunity that guarantees massive returns. Don\'t miss out on this chance to become a millionaire!',
+                isRead: false,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'investment@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Spam']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Enlarge Your... You Know',
+                body: 'Hey there, Are you looking for a way to enhance your... you know what? We have the solution you\'ve been waiting for. Click here for more details.',
+                isRead: true,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'enlargement@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Spam']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Make Money Fast!',
+                body: 'Hi, Discover the secret to making money fast and easy. Join our exclusive program and start earning thousands of dollars within days.',
+                isRead: false,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'makemoney@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Spam']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Get Rid of Debt',
+                body: 'Dear Mahatma, Struggling with debt? Our proven method will help you eliminate debt quickly and effortlessly. Take control of your finances today!',
+                isRead: true,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'debtfree@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Spam']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'You\'ve Won a Prize',
+                body: 'Congratulations, Mahatma! You have won a fabulous prize. Claim your reward now by clicking the link below. Don\'t miss out on this amazing opportunity!',
+                isRead: false,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'prizewinner@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Spam']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Exclusive Limited-Time Offer',
+                body: 'Hello, We are offering an exclusive limited-time deal that you can\'t resist. Don\'t waste any more time and take advantage of this incredible offer now!',
+                isRead: true,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'exclusiveoffer@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Spam']
               },
               {
                 id: utilService.makeId(),
@@ -565,6 +723,175 @@ function _createMails() {
                 removedAt: null,
                 from: 'baker@example.com',
                 to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Weekend Plans',
+                body: 'Hey Mahatma, I hope you\'re doing well. Let\'s plan something exciting for the upcoming weekend. I have a few ideas in mind. Let me know your thoughts.',
+                isRead: false,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'martha@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Recipe Exchange',
+                body: 'Hi Mahatma, I recently discovered a delicious recipe for homemade pizza. I thought you might be interested in trying it out. Let me know if you want me to share the details with you!',
+                isRead: false,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'foodie@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Weekend Getaway',
+                body: 'Hey Mahatma, How about planning a weekend getaway to the beach? We can relax, enjoy the sun, and have some quality time together. Let me know your thoughts!',
+                isRead: false,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'emma@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Book Recommendation',
+                body: 'Hi Mahatma, I just finished reading an incredible book that I think you would love. It has a gripping storyline and unforgettable characters. Let me know if you want me to lend it to you!',
+                isRead: true,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'booklover@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Music Playlist',
+                body: 'Hey there, I created a new playlist with some amazing songs. It includes a mix of different genres. Let me know if you want me to share it with you!',
+                isRead: false,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'musiclover@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Movie Night',
+                body: 'Hi Mahatma, I thought it would be fun to have a movie night this weekend. We can pick a few movies, grab some snacks, and enjoy a cozy evening. Let me know if you\'re interested!',
+                isRead: false,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'movielover@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Fitness Challenge',
+                body: 'Hey Mahatma, I\'m starting a fitness challenge and thought you might want to join. We can motivate each other and work towards our fitness goals. Let me know if you\'re up for it!',
+                isRead: false,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'fitnessenthusiast@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Art Exhibition',
+                body: 'Hi Mahatma, There\'s an art exhibition happening in town, and I think you would appreciate the artwork. Let me know if you\'d like to go together and explore the creative world!',
+                isRead: true,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'artlover@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Travel Tips',
+                body: 'Hey there, I recently went on a fantastic trip and gathered some useful travel tips. If you\'re planning any upcoming trips, I\'d be happy to share my insights with you!',
+                isRead: false,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'travelenthusiast@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Upcoming Party',
+                body: 'Dear Mahatma, You are invited to an amazing party next week. Get ready for a night of fun, music, and good company. Don\'t miss out!',
+                isRead: false,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'bob@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Interesting Article',
+                body: 'Hi Mahatma, I came across an interesting article that I think you will find valuable. It\'s about the latest trends in technology. Check it out!',
+                isRead: true,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'jerry@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
+              },
+              {
+                id: utilService.makeId(),
+                subject: 'Movie Recommendation',
+                body: 'Hey there, I just watched an amazing movie that I think you would enjoy. It has great reviews and a captivating storyline. Let me know if you want more details.',
+                isRead: false,
+                isStarred: false,
+                isArchived: false,
+                sentAt: utilService.generateRandomTimestamp(),
+                status: 'sent',
+                removedAt: null,
+                from: 'alice@example.com',
+                to: 'mahatma@appsus.com',
+                labels: ['Friends', 'Personal']
               },
               {
                 id: utilService.makeId(),
@@ -578,6 +905,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Work', 'Important']
               },
               {
                 id: utilService.makeId(),
@@ -591,6 +919,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'colleagues@example.com',
+                labels: ['Work', 'Important']
               },
               {
                 id: utilService.makeId(),
@@ -604,6 +933,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Work', 'Important']
               },
               {
                 id: utilService.makeId(),
@@ -617,6 +947,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Work', 'Important']
               },
               {
                 id: utilService.makeId(),
@@ -630,6 +961,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Work', 'Important']
               },
               {
                 id: utilService.makeId(),
@@ -643,6 +975,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Work']
               },
               {
                 id: utilService.makeId(),
@@ -656,6 +989,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Work']
               },
               {
                 id: utilService.makeId(),
@@ -669,6 +1003,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Work']
               },
               {
                 id: utilService.makeId(),
@@ -682,6 +1017,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'all@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -695,6 +1031,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -708,6 +1045,7 @@ function _createMails() {
                 removedAt: 1688475453161,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -721,6 +1059,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -734,6 +1073,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -747,6 +1087,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -760,6 +1101,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -773,6 +1115,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -786,6 +1129,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -799,6 +1143,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -812,6 +1157,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -825,6 +1171,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -838,6 +1185,7 @@ function _createMails() {
                 removedAt: 1688475453161,
                 from: 'hr@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -851,6 +1199,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'product@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -864,6 +1213,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'event@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -877,6 +1227,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'pm@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -890,6 +1241,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'collaborator@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -903,6 +1255,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'training@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -916,6 +1269,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'projectteam@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -929,6 +1283,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'researcher@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -942,6 +1297,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'webinar@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -955,6 +1311,7 @@ function _createMails() {
                 removedAt: 1628575453161,
                 from: 'event@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -968,6 +1325,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'pm@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -981,6 +1339,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'hr@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -994,6 +1353,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'collaborator@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1007,6 +1367,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'manager@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1020,6 +1381,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'webinar@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1033,6 +1395,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'organizer@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1046,6 +1409,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'support@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1059,6 +1423,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'hr@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1072,6 +1437,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'workshop@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1085,6 +1451,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'pm@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1098,6 +1465,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'newsletter@example.com',
                 to: 'mahatma@appsus.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1111,6 +1479,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1124,6 +1493,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1137,6 +1507,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1150,6 +1521,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Important']
               },
               {
                 id: utilService.makeId(),
@@ -1163,6 +1535,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Important']
               },
               {
                 id: utilService.makeId(),
@@ -1176,6 +1549,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Important']
               },
               {
                 id: utilService.makeId(),
@@ -1189,6 +1563,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Important']
               },
               {
                 id: utilService.makeId(),
@@ -1202,6 +1577,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Important']
               },
               {
                 id: utilService.makeId(),
@@ -1215,6 +1591,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Important']
               },
               {
                 id: utilService.makeId(),
@@ -1228,6 +1605,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Important']
               },
               {
                 id: utilService.makeId(),
@@ -1241,6 +1619,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Important']
               },
               {
                 id: utilService.makeId(),
@@ -1254,6 +1633,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: ['Important']
               },
               {
                 id: utilService.makeId(),
@@ -1267,6 +1647,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1280,6 +1661,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1293,6 +1675,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1306,6 +1689,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1319,6 +1703,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'speaker@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1332,6 +1717,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1345,6 +1731,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1358,6 +1745,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1371,6 +1759,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1384,6 +1773,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1397,6 +1787,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1410,6 +1801,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1423,6 +1815,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1436,6 +1829,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1449,6 +1843,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1462,6 +1857,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'team@example.com',
+                labels: []
               },
               {
                 id: utilService.makeId(),
@@ -1475,6 +1871,7 @@ function _createMails() {
                 removedAt: null,
                 from: 'mahatma@appsus.com',
                 to: 'organizer@example.com',
+                labels: []
               },
 
         ]

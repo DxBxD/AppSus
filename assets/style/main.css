@@ -31,6 +31,7 @@
         @import 'apps/mail/cmps/MailPreview.css';
         @import 'apps/mail/cmps/MailDetails.css';
         @import 'apps/mail/cmps/MailMenu.css';
+        @import 'apps/mail/cmps/MailLabelModal.css';
 
     /* Keep */
 

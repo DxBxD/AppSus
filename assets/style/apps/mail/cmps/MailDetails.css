@@ -57,7 +57,7 @@
     color: #202124;
 }
 
-.mail-icons span.delete-permanent {
+.mail-icons span.delete-permanent:hover {
     color: rgb(254, 41, 41);
 }
 

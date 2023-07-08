@@ -11,7 +11,8 @@ export default {
                     @starred="onMailStarred"
                     @deleted="onMailDeleted"
                     @toggleRead="onMailToggleRead"
-                    @toggleArchive="onMailToggleArchive" />
+                    @toggleArchive="onMailToggleArchive"
+                    @openLabelModal="onOpenLabelModal" />
         </section>
     `,
     components: {
@@ -33,5 +34,8 @@ export default {
         onMailToggleArchive(archivedMail) {
             this.$emit('toggleArchive', archivedMail);
         },
+        onOpenLabelModal(labeledMail) {
+            this.$emit('openLabelModal', labeledMail)
+        }
     }
 }
