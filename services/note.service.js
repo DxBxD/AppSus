@@ -117,7 +117,7 @@ function _createNotes() {
                 isPinned: false,
                 info: {
                     title: 'Me and Daddy',
-                    imgUrl: './assets/imgs/1.jpg', 
+                    imgUrl: '../assets/imgs/1.jpg', 
                     backgroundColor: "#ffd166"
                 }
             },
