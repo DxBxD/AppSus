@@ -12,6 +12,10 @@ import { eventBus } from "../services/event-bus.service.js"
 // TODO - add buttons to modal
 // TODO - work on mobile design
 // TODO - organize code
+// TODO - add a popup when adding a note
+// TODO - add a popup when saving a note
+// TODO - add a popup when deleting a note
+
 
 export default {
     template: `

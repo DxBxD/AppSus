@@ -21,7 +21,8 @@ export const noteService = {
     setFilterBy,
     _createNote,
     getEmptyNote,
-    updateIsPinned
+    updateIsPinned,
+    saveMailAsNote,
 }
 window.noteService = noteService
 
@@ -383,4 +384,12 @@ function updateIsPinned(noteId, isPinned) {
             // replace the note in the array with the updated note
             return save(updatedNote)
         })
+}
+
+function saveMailAsNote(subject = '', txt = '') {
+    const note = getEmptyNote()
+    note.id = utilService.makeId()
+    note.info = { txt, title: subject }
+    note.backgroundColor = { backgroundColor: '#eddb72' }
+    save(note)
 }
