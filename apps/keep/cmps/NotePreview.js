@@ -1,5 +1,6 @@
 
 import { noteService } from "../../../services/note.service.js"
+import { showSuccessMsg } from '../../../services/event-bus.service.js'
 import AddNote from "../cmps/AddNote.js"
 
 
@@ -23,6 +24,7 @@ export default {
             noteService.remove(this.note.id)
                 .then(() => {
                     this.$emit('removeNote')
+                    showSuccessMsg('Note removed')
                 })
         },
         changeColor(event) {
@@ -33,6 +35,7 @@ export default {
         togglePin() {
             this.note.isPinned = !this.note.isPinned
             noteService.updateIsPinned(this.note.id, this.note.isPinned)
+            showSuccessMsg('Note pinned')
         },
         duplicateNote() {
             const noteTitle = this.note.info.title || 'New Note'
@@ -43,6 +46,8 @@ export default {
             newNote.info.txt = noteTxt
             newNote.info.backgroundColor = noteBackgroundColor
             noteService.save(newNote)
+            showSuccessMsg('Note duplicated')
+
         }
     },
     computed: {

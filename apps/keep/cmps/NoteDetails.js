@@ -1,4 +1,6 @@
 import { noteService } from "../../../services/note.service.js";
+import { mailService } from "../../../services/mail.service.js";
+import { eventBus, showSuccessMsg } from "../../../services/event-bus.service.js";
 
 export default {
     template: `
@@ -8,6 +10,7 @@ export default {
             <textarea class="note-txt" v-model="note.info.txt" :style="{ backgroundColor: note.info.backgroundColor || 'bisque' }">{{ note.info.txt }}</textarea>
             <h4 class="note-date" >Created at: {{ date }}</h4>
             <button class="save-btn" @click="saveNote">Save</button>
+            <button class="send-mail-btn material-icons-outlined" @click="sendNoteAsMail">mail_outline</button>
         </section>
     </div>
     `,
@@ -42,10 +45,18 @@ export default {
             noteService.save(this.note)
                 .then(() => {
                     window.location.href = "/#/keep"
+                    showSuccessMsg('Note saved')
                     // window.location.reload()
                 }).catch(err => {
                     console.error('Error saving note:', err)
                 })
+        },
+        sendNoteAsMail() {
+            const title = this.note.info.title
+            const txt = this.note.info.txt
+            createNoteDraft(title, txt)
+            this.$router.push('/mail')
+            showSuccessMsg('Note sent as mail')
         }
     },
     created() {

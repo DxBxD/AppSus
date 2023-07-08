@@ -266,6 +266,14 @@ textarea.note-txt {
     outline: none;
 }
 
+textarea.note-title {
+    height: 80px
+}
+
+textarea.note-txt {
+    height: 300px;
+}
+
 button.save-btn {
     position: absolute;
     bottom: 0.5em;
@@ -281,6 +289,20 @@ button.save-btn {
     outline: none;
     width: 50%;
     left: 25%;
+}
+
+.send-mail-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    right: 0.2em;
+    bottom: 10px;
+}
+
+.send-mail-btn:hover {
+    color: #ffffff;
 }
 
 button.save-btn:hover {
