@@ -5,15 +5,6 @@ import NoteList from "../apps/keep/cmps/NoteList.js"
 import NoteFilter from "../apps/keep/cmps/NoteFilter.js"
 
 
-// TODO on colorpicker, value should be the note's color
-// TODO - invest in more robust demo data
-// TODO - add filters
-// TODO - add support for lists
-// TODO - work on ui 
-// TODO - work on responsive design
-// TODO - add buttons to modal
-// TODO - work on mobile design
-// TODO - organize code
 
 
 

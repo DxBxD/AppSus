@@ -37,3 +37,7 @@
 
         /* Cmps */
         @import 'apps/keep/NoteIndex.css';
+        @import 'apps/keep/NoteList.css';
+        @import 'apps/keep/NotePreview.css';
+        @import 'apps/keep/NoteDetails.css';
+        

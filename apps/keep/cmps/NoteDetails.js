@@ -26,11 +26,9 @@ export default {
         loadNote() {
             const urlParts = window.location.href.split('/')
             const noteId = urlParts[urlParts.length - 1]
-            console.log('noteId:', noteId)
 
             noteService.get(noteId).then(note => {
                 this.note = note
-                console.log('note:', note)
                 this.getFormattedDate()
             })
         },

@@ -53,7 +53,8 @@
     padding: 2em;
     box-shadow: -1px 0px 6px 0px rgba(0, 0, 0, 0.295);
     width: auto;
-    height: 13em;
+    min-height: 16em;
+    height: auto;
     border-radius: 5px;
     overflow: hidden;
     cursor: pointer;
@@ -328,7 +329,7 @@ textarea.note-title::-webkit-scrollbar {
     display: inline-block;
     height: auto;
     object-fit: cover;
-    width: 100%;
+    width: 75%;
     left: 50%;
     top: 10%;
     transform: translate(-41%, 0%);
@@ -341,7 +342,7 @@ textarea.note-title::-webkit-scrollbar {
     height: auto;
     object-fit: cover;
     max-width: 70%;
-    left: 50%;
+    left: 42%;
     top: 10%;
     transform: translate(-41%, 0%);
 }

@@ -60,7 +60,7 @@ export default {
             showSuccessMsg('Video added')
         },
         addList() {
-            console.log('Imagine that you added a list')
+            showSuccessMsg('Imagine that you added a list! meragesh 😐')
         }
     },
     components: {

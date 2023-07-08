@@ -50,7 +50,6 @@ function _setNextPrevNoteId(note) {
 }
 
 function save(note) {
-    console.log('note:', note)
     if (note.id) {
         return storageService.put(NOTES_KEY, note)
             .then(() => {
@@ -112,13 +111,13 @@ function _createNotes() {
                 }
             },
             {
-                id: utilService.makeId(),
+                id: utilService.makeId(), 
                 createdAt: 1630307463000,
-                type: 'NoteTxt',
+                type: 'noteImg',
                 isPinned: false,
                 info: {
-                    title: 'Sample Title',
-                    txt: 'Remember to call John',
+                    title: 'Me and Daddy',
+                    imgUrl: '../assets/imgs/1.jpg', 
                     backgroundColor: "#ffd166"
                 }
             },
@@ -136,22 +135,22 @@ function _createNotes() {
             {
                 id: utilService.makeId(),
                 createdAt: 1112222,
-                type: 'NoteTxt',
+                type: 'noteVideo',
                 isPinned: true,
                 info: {
-                    title: 'Daily Habits Checklist',
-                    txt: "לקנות קילו עגבניות",
+                    title: 'Boss Meragesh',
+                    videoUrl: 'https://www.youtube.com/embed/GN9cENdM27I',
                     backgroundColor: "#c54444"
                 }
             },
             {
                 id: utilService.makeId(),
                 createdAt: 1630307466000,
-                type: 'NoteTxt',
+                type: 'noteImg',
                 isPinned: false,
                 info: {
-                    title: 'Workout Schedule',
-                    txt: "Finish the report",
+                    title: 'Leroy Jenkins',
+                    imgUrl: '../assets/imgs/2.jpg',
                     backgroundColor: "#118ab2"
                 }
             },
@@ -191,11 +190,11 @@ function _createNotes() {
             {
                 id: utilService.makeId(),
                 createdAt: 1630307470000,
-                type: 'NoteTxt',
+                type: 'noteImg',
                 isPinned: false,
                 info: {
-                    title: 'Weekend Getaway Ideas',
-                    txt: "Schedule dentist appointment",
+                    title: 'Yes.',
+                    imgUrl: '../assets/imgs/3.jpg',
                     backgroundColor: "#ffd166"
                 }
             },
@@ -213,11 +212,11 @@ function _createNotes() {
             {
                 id: utilService.makeId(),
                 createdAt: 1630307472000,
-                type: 'NoteTxt',
+                type: 'noteVideo',
                 isPinned: true,
                 info: {
-                    title: 'Interesting Articles to Read',
-                    txt: "Call mom",
+                    title: 'תכנות זה פשוטי',
+                    videoUrl: 'https://www.youtube.com/embed/PZpCCpEiOm4',
                     backgroundColor: "#ef476f"
                 }
             },
