@@ -1,7 +1,6 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 import { eventBus } from './event-bus.service.js'
-
 const NOTES_KEY = 'notesDB'
 
 var gFilterBy = { txt: 'PLACEHOLDER' }
