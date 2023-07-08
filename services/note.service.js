@@ -4,7 +4,6 @@ import { eventBus } from './event-bus.service.js'
 
 const NOTES_KEY = 'notesDB'
 
-// TODO - update gFilterBy & gSortBy
 var gFilterBy = { txt: 'PLACEHOLDER' }
 var gSortBy = { txt: 'PLACEHOLDER' }
 var gPageIdx
@@ -23,6 +22,9 @@ export const noteService = {
     getEmptyNote,
     updateIsPinned,
     saveMailAsNote,
+    getImageNotes,
+    getVideoNotes,
+    getTextNotes,
 }
 window.noteService = noteService
 
@@ -104,7 +106,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: true,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Meeting Minutes July',
                     txt: 'Fullstack Me Baby!',
                     backgroundColor: "#ef476f"
                 }
@@ -116,7 +118,7 @@ function _createNotes() {
                 isPinned: false,
                 info: {
                     title: 'Sample Title',
-                    txt: "Remember to call John",
+                    txt: 'Remember to call John',
                     backgroundColor: "#ffd166"
                 }
             },
@@ -126,7 +128,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: true,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Project Timeline Update',
                     txt: "Buy milk and eggs",
                     backgroundColor: "#06d6a0"
                 }
@@ -137,7 +139,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: true,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Daily Habits Checklist',
                     txt: "לקנות קילו עגבניות",
                     backgroundColor: "#c54444"
                 }
@@ -148,7 +150,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: false,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Workout Schedule',
                     txt: "Finish the report",
                     backgroundColor: "#118ab2"
                 }
@@ -159,7 +161,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: true,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Book Recommendations',
                     txt: "Book flight tickets",
                     backgroundColor: "#ffd166"
                 }
@@ -170,7 +172,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: false,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Birthday Gift Ideas',
                     txt: "Pick up dry cleaning",
                     backgroundColor: "#06d6a0"
                 }
@@ -181,7 +183,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: false,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Favorite Recipes',
                     txt: "Send birthday gift",
                     backgroundColor: "#ef476f"
                 }
@@ -192,7 +194,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: false,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Weekend Getaway Ideas',
                     txt: "Schedule dentist appointment",
                     backgroundColor: "#ffd166"
                 }
@@ -203,7 +205,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: false,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Study Plan for Exams',
                     txt: "Buy groceries",
                     backgroundColor: "#118ab2"
                 }
@@ -214,7 +216,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: true,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Interesting Articles to Read',
                     txt: "Call mom",
                     backgroundColor: "#ef476f"
                 }
@@ -225,7 +227,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: false,
                 info: {
-                    title: 'Sample Title',
+                    title: 'List of Movies to Watch',
                     txt: "Make dinner reservation",
                     backgroundColor: "#06d6a0"
                 }
@@ -236,7 +238,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: false,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Grocery List',
                     txt: "Take the dog for a walk",
                     backgroundColor: "#ffd166"
                 }
@@ -247,7 +249,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: true,
                 info: {
-                    title: 'Sample Title',
+                    title: 'DIY Home Decor Ideas',
                     txt: "Buy birthday present",
                     backgroundColor: "#118ab2"
                 }
@@ -258,7 +260,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: true,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Dream Vacation Destinations',
                     txt: "Go to the gym",
                     backgroundColor: "#c54444"
                 }
@@ -269,7 +271,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: false,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Fitness Goals',
                     txt: "Call the plumber",
                     backgroundColor: "#06d6a0"
                 }
@@ -280,7 +282,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: false,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Career Development Plan',
                     txt: "Write a blog post",
                     backgroundColor: "#ef476f"
                 }
@@ -291,7 +293,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: true,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Monthly Budget',
                     txt: "Buy new shoes",
                     backgroundColor: "#ffd166"
                 }
@@ -313,7 +315,7 @@ function _createNotes() {
                 type: "NoteTxt",
                 isPinned: false,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Tips for Effective Communication',
                     txt: "Finish the book",
                     backgroundColor: "#06d6a0"
                 }
@@ -324,7 +326,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: false,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Mindfulness Techniques',
                     txt: "Start a new project",
                     backgroundColor: "#ef476f"
                 }
@@ -335,7 +337,7 @@ function _createNotes() {
                 type: "NoteTxt",
                 isPinned: true,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Skill Development Resources',
                     txt: "Attend the meeting",
                     backgroundColor: "#ffd166"
                 }
@@ -346,7 +348,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: false,
                 info: {
-                    title: 'Sample Title',
+                    title: 'Self-Care Routine',
                     txt: "Clean the house",
                     backgroundColor: "#06d6a0"
                 }
@@ -357,7 +359,7 @@ function _createNotes() {
                 type: 'NoteTxt',
                 isPinned: true,
                 info: {
-                    title: 'Sample Title',
+                    title: 'New Year Resolutions',
                     txt: "Take a break",
                     backgroundColor: "#c54444"
                 }
@@ -393,3 +395,20 @@ function saveMailAsNote(subject = '', txt = '') {
     note.backgroundColor = { backgroundColor: '#eddb72' }
     save(note)
 }
+
+function getImageNotes() {
+    return storageService.query(NOTES_KEY)
+        .then(notes => notes.filter(note => note.type === 'noteImg'))
+}
+
+function getVideoNotes() {
+    return storageService.query(NOTES_KEY)
+        .then(notes => notes.filter(note => note.type === 'noteVideo'))
+}
+
+function getTextNotes() {
+    return storageService.query(NOTES_KEY)
+        .then(notes => notes.filter(note => note.type === 'NoteTxt'))
+}
+
+

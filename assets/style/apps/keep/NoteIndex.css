@@ -368,3 +368,40 @@ textarea.note-title::-webkit-scrollbar {
     top: 10%;
     transform: translate(-41%, 0%);
 }
+
+.note-filter-container {
+    position: relative;
+    display: inline-block;
+    background: none;
+}
+
+.filter-categories-container {
+    display: none;
+    position: absolute;
+    min-width: 230px;
+    z-index: 5;
+    background-color: #f1f1f1;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    opacity: 0.9;
+}
+
+.filter-categories-container a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 1.4em;
+    opacity: 1;
+}
+
+.filter-categories-container a:hover {
+    background-color: #81dbff8a;
+    font-weight: 800;
+    color: #FFFFFF;
+    border-radius: 15px;
+}
+
+.show {
+    display: block;
+}

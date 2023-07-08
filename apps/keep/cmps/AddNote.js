@@ -26,6 +26,7 @@ export default {
                     console.log('Saved Note:', savedNote)
                     this.$emit('noteAdded')
                     showSuccessMsg('Note added')
+                    this.note = noteService.getEmptyNote()
                 })
                 .catch(err => {
                     console.error('Error saving note:', err)
@@ -47,12 +48,16 @@ export default {
 
             if (file) {
                 reader.readAsDataURL(file)
+                this.note = noteService.getEmptyNote()
+
             }
         },
-        addVideo() {
+        addVideo() { 
             this.note.type = 'noteVideo'
             this.note.info.videoUrl = prompt('Enter video URL')
             this.addNote()
+            this.note = noteService.getEmptyNote()
+            showSuccessMsg('Video added')
         },
         addList() {
             console.log('Imagine that you added a list')

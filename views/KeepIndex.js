@@ -1,12 +1,14 @@
-import AddNote from '../apps/keep/cmps/AddNote.js'
 import { noteService } from "../services/note.service.js"
-import NoteList from "../apps/keep/cmps/NoteList.js"
 import { eventBus } from "../services/event-bus.service.js"
+import AddNote from '../apps/keep/cmps/AddNote.js'
+import NoteList from "../apps/keep/cmps/NoteList.js"
+import NoteFilter from "../apps/keep/cmps/NoteFilter.js"
 
 
 // TODO on colorpicker, value should be the note's color
+// TODO - invest in more robust demo data
 // TODO - add filters
-// TODO - add support for videos/lists
+// TODO - add support for lists
 // TODO - work on ui 
 // TODO - work on responsive design
 // TODO - add buttons to modal
@@ -19,14 +21,15 @@ export default {
     template: `
         <section class="keep-page">
             <section class="keep-options-bar">
+                <NoteFilter @set-filter="setFilter" />
                 <AddNote @noteAdded="addNote"/>
             </section>
             <section class="note-list-container">
-                <NoteList
-                    v-if="sortedNotes.length"
-                    :notes="sortedNotes" 
-                    @removeNote="removeNote()"
-                    @openNote="openNote"/>
+            <NoteList
+                v-if="sortedNotes.length"
+                :notes="sortedNotes"
+                @removeNote="removeNote"
+                @openNote="openNote"/>
             </section>
             <router-view/>
         </section>
@@ -34,6 +37,7 @@ export default {
     data() {
         return {
             notes: [],
+            filter: null,
         }
     },
     created() {
@@ -64,7 +68,37 @@ export default {
         },
         openNote(id) {
             this.$router.push(`keep/${id}`)
+        },
+        setFilter(value) {
+            this.filter = value
+            if (value === 'image') {
+                noteService.getImageNotes()
+                    .then(notes => {
+                        this.notes = notes
+                    }
+                    )
+            } else if (value === 'video') {
+                noteService.getVideoNotes()
+                    .then(notes => {
+                        this.notes = notes
+                    }
+                    )
+            } else if (value === 'text') {
+                noteService.getTextNotes()
+                    .then(notes => {
+                        this.notes = notes
+                    }
+                    )
+            } else if (value === 'all') {
+                noteService.query()
+                    .then(notes => {
+                        this.notes = notes
+                    }
+                    )
+            }
+
         }
+
     },
     watch: {
         '$route.params.id': {
@@ -78,10 +112,11 @@ export default {
     computed: {
         sortedNotes() {
             return this.notes.sort((a, b) => b.isPinned - a.isPinned)
-        }
+        },
     },
     components: {
         NoteList,
-        AddNote
+        AddNote,
+        NoteFilter
     }
 }
