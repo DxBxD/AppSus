@@ -110,17 +110,6 @@ function _createNotes() {
                 }
             },
             {
-                id: utilService.makeId(), 
-                createdAt: 1630307463000,
-                type: 'noteImg',
-                isPinned: false,
-                info: {
-                    title: 'Me and Daddy',
-                    imgUrl: 'assets/imgs/1.jpg', 
-                    backgroundColor: "#ffd166"
-                }
-            },
-            {
                 id: utilService.makeId(),
                 createdAt: 1630307464000,
                 type: 'NoteTxt',
@@ -140,17 +129,6 @@ function _createNotes() {
                     title: 'Boss Meragesh',
                     videoUrl: 'https://www.youtube.com/embed/GN9cENdM27I',
                     backgroundColor: "#c54444"
-                }
-            },
-            {
-                id: utilService.makeId(),
-                createdAt: 1630307466000,
-                type: 'noteImg',
-                isPinned: false,
-                info: {
-                    title: 'Leroy Jenkins',
-                    imgUrl: 'assets/imgs/2.jpg',
-                    backgroundColor: "#118ab2"
                 }
             },
             {
@@ -184,17 +162,6 @@ function _createNotes() {
                     title: 'Favorite Recipes',
                     txt: "Send birthday gift",
                     backgroundColor: "#ef476f"
-                }
-            },
-            {
-                id: utilService.makeId(),
-                createdAt: 1630307470000,
-                type: 'noteImg',
-                isPinned: false,
-                info: {
-                    title: 'Yes.',
-                    imgUrl: 'assets/imgs/3.jpg',
-                    backgroundColor: "#ffd166"
                 }
             },
             {
