@@ -210,17 +210,6 @@ function _createNotes() {
             },
             {
                 id: utilService.makeId(),
-                createdAt: 1630307472000,
-                type: 'noteVideo',
-                isPinned: true,
-                info: {
-                    title: 'תכנות זה פשוטי',
-                    videoUrl: 'https://www.youtube.com/embed/PZpCCpEiOm4',
-                    backgroundColor: "#ef476f"
-                }
-            },
-            {
-                id: utilService.makeId(),
                 createdAt: 1630307473000,
                 type: 'NoteTxt',
                 isPinned: false,
